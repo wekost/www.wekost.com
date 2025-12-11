@@ -102,13 +102,110 @@ function closeRole() {
   document.getElementById("modal-login").style.display = "none";
 }
 
-//
+//signin user insert 
+const signinBtnUser = document.getElementById("form-signin-user");
+signinBtnUser.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name_user").value;
+  const email = document.getElementById("email_user").value;
+  const phone = document.getElementById("whatsapp_number_user").value;
+  const password = document.getElementById("password_user").value;
+  const confirm_password = document.getElementById("confirm_password_user").value;
+  const err_message = document.getElementById("error_msg_user")
 
-const signinBtn = document.getElementById("form-signin-admin");
-signinBtn.addEventListener("submit", async (e) => {});
+  const dataUser = {
+    name: name,
+    email: email,
+    phone: phone,
+    password: password,
+    confirm_password: confirm_password,
+  }
+  try{
+    const response = await fetch("http://localhost:8080/auth/user/register", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(dataUser)
+    })
+    const resJson = await response.json()
+    if(resJson.status === true){
+      showLogin();
+    }
+    err_message.textContent = resJson.message
+  }catch(err){
+    console.log(err);
+  }
+});
+
+//signin admin insert 
+const signinBtnAdmin = document.getElementById("form-signin-admin");
+signinBtnAdmin.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const name = document.getElementById("name_admin").value;
+  const email = document.getElementById("email_admin").value;
+  const phone = document.getElementById("whatsapp_number_admin").value;
+  const password = document.getElementById("password_admin").value;
+  const confirm_password = document.getElementById("confirm_password_admin").value;
+  const err_message = document.getElementById("error_msg_admin")
+
+  const dataUser = {
+    name: name,
+    email: email,
+    phone: phone,
+    password: password,
+    confirm_password: confirm_password,
+  }
+  try{
+    const response = await fetch("http://localhost:8080/auth/admin/register", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(dataUser)
+    })
+    const resJson = await response.json()
+    if(resJson.status === true){
+      window.location.href = "/data-kosan.html"
+    }
+    err_message.textContent = resJson.message
+  }catch(err){
+    console.log(err);
+  }
+});
+
+//login select
+const loginBtn = document.getElementById("form-login");
+loginBtn.addEventListener("submit", async (e)=>{
+  e.preventDefault();
+  const email = document.getElementById("email_login").value;
+  const password = document.getElementById("password_login").value;
+  const err_message = document.getElementById("error_msg_login")
+  const dataUser = {
+    email: email,
+    password: password,
+  }
+  try{
+    const response = await fetch("http://localhost:8080/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type":"application/json"
+      },
+      body: JSON.stringify(dataUser)
+    })
+    const resJson = await response.json()
+    err_message.textContent = resJson.message
+    if(resJson.status === true){
+      window.location.href = "/homepage.html"
+    }else if(resJson.status === false){
+      window.location.href = "/dashboard-admin.html"
+    }
+  }catch(err){
+    console.log(err)
+  }
+})
 
 //navbar dashboard admin active link
-
 function showSection(sectionId) {
   const sections = document.querySelectorAll(
     ".dashboard-admin-content-section"
