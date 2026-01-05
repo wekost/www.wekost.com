@@ -1,13 +1,14 @@
 require('dotenv').config();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
-const con = mysql.createConnection(process.env.DATABASE_URL);
+const con = mysql.createPool(process.env.DATABASE_URL);
 
-con.connect((err) => {
+con.getConnection((err, connection) => {
   if (err) {
-    console.log('database tidak terkoneksi');
+    console.error('database tidak terkoneksi', err);
   } else {
     console.log('database terkoneksi');
+    connection.release();
   }
 });
 
