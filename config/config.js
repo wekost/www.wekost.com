@@ -3,7 +3,7 @@ const mysql = require("mysql");
 const con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "HouseRules12345",
   database: "db_widyatamakampuskos",
   port: 3306,
 });
@@ -11,9 +11,9 @@ const con = mysql.createConnection({
 con.connect((err) => {
   if (err) {
     console.log("database tidak terkoneksi");
-  }else{
-    console.log("database terkoneksi")
-  };
+  } else {
+    console.log("database terkoneksi");
+  }
 });
 
 module.exports = con;

@@ -1,11 +1,623 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!--css-->
+    <link rel="stylesheet" href="css/body.css" />
+    <link rel="stylesheet" href="css/dashboard-user.css" />
+
+    <!--tailwind-->
+    <link href="/src/output.css" rel="stylesheet" />
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>hello world</h1>
+  <body class="min-h-screen">
+    <div class="flex min-h-screen bg-[#F9FAFB]">
+      <div
+        id="sidebar"
+        class="fixed inset-0 z-10 mt-10 h-full w-70 -translate-x-full bg-white shadow-md shadow-black/20 transition-transform duration-300 md:sticky md:mt-0 md:h-screen md:w-auto md:translate-x-0"
+      >
+        <div class="mx-3 hidden items-center gap-2 pt-5 md:flex md:flex-col">
+          <div class="flex gap-2">
+            <svg
+              width="30"
+              height="31"
+              viewBox="0 0 30 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.5 7.3421C7.5 11.3901 10.865 14.6842 15 14.6842C19.135 14.6842 22.5 11.3901 22.5 7.3421C22.5 3.29416 19.135 0 15 0C10.865 0 7.5 3.29416 7.5 7.3421ZM28.3333 31H30V29.3684C30 23.0722 24.765 17.9474 18.3333 17.9474H11.6667C5.23333 17.9474 0 23.0722 0 29.3684V31H28.3333Z"
+                fill="url(#paint0_linear_249_1884)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_249_1884"
+                  x1="15"
+                  y1="0"
+                  x2="15"
+                  y2="31"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#677AE4" />
+                  <stop offset="1" stop-color="#8A38F5" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <h3 class="text-[1.2rem] font-bold">Penyewa</h3>
+          </div>
+          <p class="text-[0.8rem] font-medium text-[#37415E]">
+            Dashboard penyewa
+          </p>
+        </div>
+        <div class="mt-4 flex flex-col gap-3">
+          <div
+            onclick="(showSection('dashboard'), showHover(`hover-dashboard`))"
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-dashboard"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.17395 3.16505C8.12742 3.12054 8.06552 3.0957 8.00113 3.0957C7.93675 3.0957 7.87485 3.12054 7.82832 3.16505L2.0752 8.66099C2.05076 8.68436 2.03132 8.71244 2.01806 8.74354C2.00479 8.77464 1.99797 8.80811 1.99801 8.84192L1.99707 14C1.99707 14.2653 2.10243 14.5196 2.28996 14.7072C2.4775 14.8947 2.73185 15 2.99707 15H6.0002C6.1328 15 6.25998 14.9474 6.35375 14.8536C6.44752 14.7598 6.5002 14.6327 6.5002 14.5V10.25C6.5002 10.1837 6.52653 10.1202 6.57342 10.0733C6.6203 10.0264 6.68389 10 6.7502 10H9.2502C9.3165 10 9.38009 10.0264 9.42697 10.0733C9.47386 10.1202 9.5002 10.1837 9.5002 10.25V14.5C9.5002 14.6327 9.55287 14.7598 9.64664 14.8536C9.74041 14.9474 9.86759 15 10.0002 15H13.0021C13.2673 15 13.5216 14.8947 13.7092 14.7072C13.8967 14.5196 14.0021 14.2653 14.0021 14V8.84192C14.0021 8.80811 13.9953 8.77464 13.982 8.74354C13.9688 8.71244 13.9493 8.68436 13.9249 8.66099L8.17395 3.16505Z"
+                fill="black"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+              <path
+                d="M15.3409 7.62969L13.0034 5.39344V2C13.0034 1.86739 12.9508 1.74021 12.857 1.64645C12.7632 1.55268 12.6361 1.5 12.5034 1.5H11.0034C10.8708 1.5 10.7437 1.55268 10.6499 1.64645C10.5561 1.74021 10.5034 1.86739 10.5034 2V3L8.69345 1.26937C8.52407 1.09812 8.2722 1 8.00001 1C7.72876 1 7.47751 1.09813 7.30814 1.26969L0.661262 7.62906C0.466887 7.81656 0.442512 8.125 0.619387 8.32812C0.663803 8.3794 0.718187 8.42109 0.77923 8.45068C0.840273 8.48027 0.906698 8.49712 0.974462 8.50022C1.04223 8.50332 1.10991 8.4926 1.1734 8.46871C1.23689 8.44481 1.29485 8.40825 1.34376 8.36125L7.82814 2.165C7.87466 2.12049 7.93656 2.09565 8.00095 2.09565C8.06533 2.09565 8.12724 2.12049 8.17376 2.165L14.6588 8.36125C14.7543 8.45286 14.8822 8.50285 15.0146 8.50028C15.1469 8.4977 15.2728 8.44276 15.3647 8.3475C15.5566 8.14875 15.5406 7.82062 15.3409 7.62969Z"
+                fill="black"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+            </svg>
+            <a class="font-bold group-hover:text-[#37415E] md:text-[0.8rem]"
+              >Dashboard</a
+            >
+          </div>
+          <div
+            onclick="(showSection('kamar-saya'), showHover(`hover-kamar-saya`))"
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-kamar-saya"
+          >
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1.6665 5.25V15.75M18.3332 15.75V12.6875H1.6665"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+              <path
+                d="M9.1665 7V12.6875H18.3332V8.3125C18.3332 7.9644 18.2015 7.63056 17.9671 7.38442C17.7326 7.13828 17.4147 7 17.0832 7H9.1665Z"
+                fill="black"
+                stroke="black"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+              <path
+                d="M5.4165 10.0625C6.10686 10.0625 6.6665 9.47487 6.6665 8.75C6.6665 8.02513 6.10686 7.4375 5.4165 7.4375C4.72615 7.4375 4.1665 8.02513 4.1665 8.75C4.1665 9.47487 4.72615 10.0625 5.4165 10.0625Z"
+                fill="black"
+                stroke="black"
+                stroke-width="2"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+            </svg>
+
+            <a class="font-bold group-hover:text-[#37415E] md:text-[0.8rem]"
+              >Kamar Saya</a
+            >
+          </div>
+          <div
+            onclick="(showSection('pembayaran'), showHover(`hover-pembayaran`))"
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-pembayaran"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.5 3C2.83696 3 2.20107 3.26339 1.73223 3.73223C1.26339 4.20107 1 4.83696 1 5.5V6H15V5.5C15 4.83696 14.7366 4.20107 14.2678 3.73223C13.7989 3.26339 13.163 3 12.5 3H3.5ZM15 7H1V10.5C1 11.163 1.26339 11.7989 1.73223 12.2678C2.20107 12.7366 2.83696 13 3.5 13H12.5C13.163 13 13.7989 12.7366 14.2678 12.2678C14.7366 11.7989 15 11.163 15 10.5V7ZM10.5 10H12.5C12.6326 10 12.7598 10.0527 12.8536 10.1464C12.9473 10.2402 13 10.3674 13 10.5C13 10.6326 12.9473 10.7598 12.8536 10.8536C12.7598 10.9473 12.6326 11 12.5 11H10.5C10.3674 11 10.2402 10.9473 10.1464 10.8536C10.0527 10.7598 10 10.6326 10 10.5C10 10.3674 10.0527 10.2402 10.1464 10.1464C10.2402 10.0527 10.3674 10 10.5 10Z"
+                fill="black"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+            </svg>
+
+            <a class="font-bold group-hover:text-[#37415E] md:text-[0.8rem]"
+              >Pembayaran</a
+            >
+          </div>
+          <div
+            onclick="
+              (showSection('laporkan-keluhan'),
+                showHover('hover-laporkan-keluhan'))
+            "
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-laporkan-keluhan"
+          >
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+            >
+              <path
+                d="M10 14.875C10.2361 14.875 10.4342 14.791 10.5942 14.623C10.7542 14.455 10.8339 14.2473 10.8333 14C10.8328 13.7527 10.7528 13.545 10.5933 13.377C10.4339 13.209 10.2361 13.125 10 13.125C9.76389 13.125 9.56611 13.209 9.40667 13.377C9.24722 13.545 9.16722 13.7527 9.16667 14C9.16611 14.2473 9.24611 14.4553 9.40667 14.6239C9.56722 14.7925 9.765 14.8762 10 14.875ZM10 11.375C10.2361 11.375 10.4342 11.291 10.5942 11.123C10.7542 10.955 10.8339 10.7473 10.8333 10.5V7C10.8333 6.75208 10.7533 6.54442 10.5933 6.377C10.4333 6.20958 10.2356 6.12558 10 6.125C9.76444 6.12442 9.56667 6.20842 9.40667 6.377C9.24667 6.54558 9.16667 6.75325 9.16667 7V10.5C9.16667 10.7479 9.24667 10.9559 9.40667 11.1239C9.56667 11.2919 9.76444 11.3756 10 11.375ZM7.5625 18.375C7.34028 18.375 7.12861 18.3313 6.9275 18.2438C6.72639 18.1562 6.54917 18.0323 6.39583 17.8719L2.97917 14.2844C2.82639 14.124 2.70833 13.9379 2.625 13.7261C2.54167 13.5144 2.5 13.2924 2.5 13.0602V7.9415C2.5 7.70817 2.54167 7.48592 2.625 7.27475C2.70833 7.06358 2.82639 6.8775 2.97917 6.7165L6.39583 3.129C6.54861 2.96858 6.72583 2.84463 6.9275 2.75713C7.12917 2.66963 7.34083 2.62558 7.5625 2.625H12.4375C12.6597 2.625 12.8717 2.66875 13.0733 2.75625C13.275 2.84375 13.4519 2.96771 13.6042 3.12813L17.0208 6.71563C17.1736 6.87604 17.2917 7.06212 17.375 7.27387C17.4583 7.48562 17.5 7.70787 17.5 7.94062V13.0594C17.5 13.2927 17.4583 13.5153 17.375 13.727C17.2917 13.9387 17.1736 14.1245 17.0208 14.2844L13.6042 17.8719C13.4514 18.0323 13.2742 18.1562 13.0725 18.2438C12.8708 18.3313 12.6592 18.375 12.4375 18.375H7.5625Z"
+                fill="black"
+              />
+            </svg>
+
+            <a class="font-bold group-hover:text-[#677ae4] md:text-[0.8rem]"
+              >Laporkan Keluhan</a
+            >
+          </div>
+          <div
+            onclick="(showSection('pengaturan'), showHover('hover-pengaturan'))"
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-pengaturan"
+          >
+            <svg
+              width="19"
+              height="19"
+              viewBox="0 0 19 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M9.5097 7.24751C8.95491 7.24751 8.43538 7.46274 8.04202 7.8561C7.65052 8.24946 7.43343 8.76899 7.43343 9.32378C7.43343 9.87856 7.65052 10.3981 8.04202 10.7915C8.43538 11.183 8.95491 11.4 9.5097 11.4C10.0645 11.4 10.584 11.183 10.9774 10.7915C11.3689 10.3981 11.586 9.87856 11.586 9.32378C11.586 8.76899 11.3689 8.24946 10.9774 7.8561C10.7852 7.6625 10.5566 7.509 10.3046 7.40452C10.0527 7.30005 9.78245 7.24668 9.5097 7.24751ZM17.1598 11.6171L15.9463 10.5799C16.0038 10.2274 16.0335 9.86743 16.0335 9.50933C16.0335 9.15122 16.0038 8.7894 15.9463 8.43872L17.1598 7.40151C17.2515 7.32304 17.3171 7.21852 17.3479 7.10185C17.3787 6.98519 17.3733 6.8619 17.3324 6.74839L17.3157 6.70015C16.9817 5.76627 16.4813 4.90063 15.8387 4.14517L15.8053 4.1062C15.7273 4.01445 15.6233 3.9485 15.507 3.91703C15.3908 3.88557 15.2677 3.89006 15.154 3.92993L13.6474 4.46616C13.0908 4.00972 12.471 3.64976 11.7993 3.39927L11.508 1.82397C11.4861 1.7053 11.4285 1.59613 11.343 1.51095C11.2575 1.42578 11.1481 1.36864 11.0293 1.34712L10.9792 1.33784C10.0144 1.16343 8.99759 1.16343 8.03275 1.33784L7.98265 1.34712C7.86389 1.36864 7.75449 1.42578 7.66899 1.51095C7.58348 1.59613 7.52592 1.7053 7.50394 1.82397L7.21077 3.40669C6.54545 3.65916 5.92566 4.01825 5.37571 4.46987L3.85794 3.92993C3.74432 3.88975 3.62117 3.88509 3.50484 3.91657C3.38851 3.94806 3.28451 4.0142 3.20667 4.1062L3.17327 4.14517C2.53181 4.90143 2.03154 5.76686 1.69632 6.70015L1.67962 6.74839C1.59612 6.98032 1.66478 7.24009 1.85218 7.40151L3.0805 8.44985C3.02298 8.79868 2.99515 9.15493 2.99515 9.50747C2.99515 9.86372 3.02298 10.22 3.0805 10.5651L1.85589 11.6134C1.76422 11.6919 1.69861 11.7964 1.66779 11.9131C1.63697 12.0298 1.64239 12.153 1.68333 12.2666L1.70003 12.3148C2.03587 13.2481 2.53128 14.1109 3.17698 14.8698L3.21038 14.9087C3.28841 15.0005 3.39241 15.0664 3.50867 15.0979C3.62493 15.1294 3.748 15.1249 3.86165 15.085L5.37942 14.5451C5.93235 14.9997 6.54837 15.3596 7.21448 15.6083L7.50765 17.191C7.52963 17.3096 7.58719 17.4188 7.6727 17.504C7.7582 17.5892 7.8676 17.6463 7.98636 17.6678L8.03646 17.6771C9.01079 17.8524 10.0086 17.8524 10.9829 17.6771L11.033 17.6678C11.1518 17.6463 11.2612 17.5892 11.3467 17.504C11.4322 17.4188 11.4898 17.3096 11.5117 17.191L11.8031 15.6157C12.4747 15.3633 13.0945 15.0052 13.6511 14.5488L15.1577 15.085C15.2714 15.1252 15.3945 15.1299 15.5108 15.0984C15.6272 15.0669 15.7312 15.0007 15.809 14.9087L15.8424 14.8698C16.4881 14.1072 16.9835 13.2481 17.3194 12.3148L17.3361 12.2666C17.4159 12.0365 17.3472 11.7786 17.1598 11.6171ZM9.5097 12.5857C7.70804 12.5857 6.24778 11.1254 6.24778 9.32378C6.24778 7.52212 7.70804 6.06187 9.5097 6.06187C11.3114 6.06187 12.7716 7.52212 12.7716 9.32378C12.7716 11.1254 11.3114 12.5857 9.5097 12.5857Z"
+                fill="black"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+            </svg>
+
+            <a class="font-bold group-hover:text-[#37415E] md:text-[0.8rem]"
+              >Pengaturan</a
+            >
+          </div>
+          <div
+            onclick="(showSection('kembali'), showHover('hover-kembali'))"
+            class="navbar-dashboard-admin-menu-list group mx-3 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2 hover:bg-[#D8D8D8]"
+            id="hover-kembali"
+          >
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.16667 18.375C3.70833 18.375 3.31611 18.2038 2.99 17.8614C2.66389 17.519 2.50056 17.1068 2.5 16.625V4.375C2.5 3.89375 2.66333 3.48192 2.99 3.1395C3.31667 2.79708 3.70889 2.62558 4.16667 2.625H10V4.375H4.16667V16.625H10V18.375H4.16667ZM13.3333 14.875L12.1875 13.6062L14.3125 11.375H7.5V9.625H14.3125L12.1875 7.39375L13.3333 6.125L17.5 10.5L13.3333 14.875Z"
+                fill="black"
+                class="group-hover:bg-[#516bff] group-hover:fill-[#516bff]"
+              />
+            </svg>
+
+            <a class="font-bold group-hover:text-[#37415E] md:text-[0.8rem]"
+              >Kembali</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="dashboard-user" class="flex-1">
+        <div
+          class="sticky top-0 z-20 flex w-full flex-col justify-center gap-1 bg-white shadow-sm md:h-[4rem]"
+        >
+          <div class="mx-3 flex flex-row items-center justify-between gap-1">
+            <button
+              onclick="toggleSidebar()"
+              class="ml-1 text-[2rem] md:hidden"
+            >
+              ☰
+            </button>
+            <h1 class="text-[1.3rem] font-bold text-[#323232] md:text-[1.7rem]">
+              Dashboard
+            </h1>
+            <div class="flex items-center md:mr-3 md:gap-3">
+              <div id="btn-notfikasi" class="relative cursor-pointer">
+                <svg
+                  width="33"
+                  height="33"
+                  viewBox="0 0 33 33"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M28.875 26.125V27.5H4.125V26.125L6.875 23.375V15.125C6.875 10.8625 9.66625 7.10875 13.75 5.89875V5.5C13.75 4.77065 14.0397 4.07118 14.5555 3.55546C15.0712 3.03973 15.7707 2.75 16.5 2.75C17.2293 2.75 17.9288 3.03973 18.4445 3.55546C18.9603 4.07118 19.25 4.77065 19.25 5.5V5.89875C23.3337 7.10875 26.125 10.8625 26.125 15.125V23.375L28.875 26.125ZM19.25 28.875C19.25 29.6043 18.9603 30.3038 18.4445 30.8195C17.9288 31.3353 17.2293 31.625 16.5 31.625C15.7707 31.625 15.0712 31.3353 14.5555 30.8195C14.0397 30.3038 13.75 29.6043 13.75 28.875"
+                    fill="#535353"
+                  />
+                </svg>
+                <span
+                  class="py-0.2 absolute top-0 right-0 rounded-2xl bg-red-500 px-1.5 text-[0.8rem] text-white"
+                  >2</span
+                >
+              </div>
+              <img
+                class="h-auto w-[3rem] rounded-[2rem]"
+                src="img/default_people.png"
+              />
+              <p id="nama-user" class="text-[1rem] font-semibold"></p>
+            </div>
+          </div>
+        </div>
+        <div
+          id="dashboard"
+          class="dashboard-admin-content-section active mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <div class="flex flex-col gap-5">
+            <div
+              class="mt-5 flex flex-col items-center gap-5 rounded-[1rem] bg-white px-5 py-5 shadow-[0_0_15px_#00000013] md:flex-row"
+            >
+              <div
+                class="flex w-[80%] items-center justify-between gap-1 rounded-[1rem] bg-linear-to-br from-[#4BB0FE] to-[#06ECFE] px-10 py-4"
+              >
+                <div class="flex flex-col justify-center gap-1">
+                  <p
+                    class="text-[1rem] font-bold text-white opacity-50 md:text-[0.9rem]"
+                  >
+                    Nama Kamar
+                  </p>
+                  <span
+                    class="nama-kamar text-[1.5rem] text-white md:text-[1.5rem]"
+                  ></span>
+                </div>
+                <svg
+                  width="67"
+                  height="42"
+                  viewBox="0 0 67 42"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.55">
+                    <path
+                      d="M2.5 2.5V39.5V2.5ZM64.1667 28.7083V39.5V28.7083ZM64.1667 28.7083H2.5H64.1667Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M2.5 2.5V39.5M64.1667 39.5V28.7083H2.5"
+                      stroke="white"
+                      stroke-width="5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M30.25 8.66675V28.7084H64.1667V13.2917C64.1667 12.0651 63.6794 10.8887 62.812 10.0214C61.9447 9.15402 60.7683 8.66675 59.5417 8.66675H30.25Z"
+                      fill="white"
+                      stroke="white"
+                      stroke-width="5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M16.375 19.4583C18.9293 19.4583 21 17.3876 21 14.8333C21 12.2789 18.9293 10.2083 16.375 10.2083C13.8207 10.2083 11.75 12.2789 11.75 14.8333C11.75 17.3876 13.8207 19.4583 16.375 19.4583Z"
+                      fill="white"
+                      stroke="white"
+                      stroke-width="5"
+                    />
+                  </g>
+                </svg>
+              </div>
+
+              <div
+                class="flex w-[80%] items-center justify-between gap-1 rounded-[1rem] bg-linear-to-br from-[#42EB86] to-[#39F7CC] px-10 py-4"
+              >
+                <div class="flex flex-col justify-center gap-1">
+                  <p
+                    class="text-[1.2rem] font-bold text-white opacity-50 md:text-[0.8rem]"
+                  >
+                    Status pembayaran
+                  </p>
+                  <span
+                    class="text-[1.5rem] text-white md:text-[1.5rem]"
+                    id="status-pembayaran"
+                    >Lunas</span
+                  >
+                </div>
+                <svg
+                  width="36"
+                  height="36"
+                  viewBox="0 0 36 36"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.55"
+                    d="M15.48 21.24L11.61 17.37C11.28 17.04 10.86 16.875 10.35 16.875C9.84 16.875 9.42 17.04 9.09 17.37C8.76 17.7 8.595 18.12 8.595 18.63C8.595 19.14 8.76 19.56 9.09 19.89L14.22 25.02C14.58 25.38 15 25.56 15.48 25.56C15.96 25.56 16.38 25.38 16.74 25.02L26.91 14.85C27.24 14.52 27.405 14.1 27.405 13.59C27.405 13.08 27.24 12.66 26.91 12.33C26.58 12 26.16 11.835 25.65 11.835C25.14 11.835 24.72 12 24.39 12.33L15.48 21.24ZM18 36C15.51 36 13.17 35.5272 10.98 34.5816C8.79 33.636 6.885 32.3538 5.265 30.735C3.645 29.1162 2.3628 27.2112 1.4184 25.02C0.474002 22.8288 0.00120228 20.4888 2.27848e-06 18C-0.00119772 15.5112 0.471602 13.1712 1.4184 10.98C2.3652 8.7888 3.6474 6.8838 5.265 5.265C6.8826 3.6462 8.7876 2.364 10.98 1.4184C13.1724 0.4728 15.5124 0 18 0C20.4876 0 22.8276 0.4728 25.02 1.4184C27.2124 2.364 29.1174 3.6462 30.735 5.265C32.3526 6.8838 33.6354 8.7888 34.5834 10.98C35.5314 13.1712 36.0036 15.5112 36 18C35.9964 20.4888 35.5236 22.8288 34.5816 25.02C33.6396 27.2112 32.3574 29.1162 30.735 30.735C29.1126 32.3538 27.2076 33.6366 25.02 34.5834C22.8324 35.5302 20.4924 36.0024 18 36Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+
+              <div
+                class="flex w-[80%] items-center justify-between gap-1 rounded-[1rem] bg-linear-to-br from-[#F18EEE] to-[#F55D7A] px-10 py-4"
+              >
+                <div class="flex flex-col justify-center gap-1">
+                  <p
+                    class="text-[1.5rem] font-bold text-white opacity-50 md:text-[1rem]"
+                  >
+                    Sisa Sewa
+                  </p>
+                  <span
+                    class="text-[1.5rem] text-white md:text-[1.5rem]"
+                    id="sisa-sewa"
+                    >0</span
+                  >
+                </div>
+                <svg
+                  width="38"
+                  height="37"
+                  viewBox="0 0 38 37"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.55">
+                    <path
+                      d="M0 12.3685C0 8.79502 -1.12935e-07 7.01018 1.11032 5.89987C2.22063 4.78955 4.00547 4.78955 7.57895 4.78955H30.3158C33.8893 4.78955 35.6741 4.78955 36.7844 5.89987C37.8947 7.01018 37.8947 8.79502 37.8947 12.3685C37.8947 13.2609 37.8947 13.7081 37.6181 13.9866C37.3396 14.2632 36.8905 14.2632 36 14.2632H1.89474C1.00232 14.2632 0.555158 14.2632 0.276631 13.9866C-1.69403e-07 13.7081 0 13.259 0 12.3685ZM0 29.4211C0 32.9946 -1.12935e-07 34.7794 1.11032 35.8898C2.22063 37.0001 4.00547 37.0001 7.57895 37.0001H30.3158C33.8893 37.0001 35.6741 37.0001 36.7844 35.8898C37.8947 34.7794 37.8947 32.9946 37.8947 29.4211V19.9474C37.8947 19.055 37.8947 18.6079 37.6181 18.3293C37.3396 18.0527 36.8905 18.0527 36 18.0527H1.89474C1.00232 18.0527 0.555158 18.0527 0.276631 18.3293C-1.69403e-07 18.6079 0 19.0569 0 19.9474V29.4211Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M9.47461 1V6.68421M28.422 1V6.68421"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </g>
+                </svg>
+              </div>
+
+              <div
+                class="flex w-[80%] items-center justify-between gap-1 rounded-[1rem] bg-linear-to-br from-[#FA7B91] to-[#FDCE4F] px-10 py-4"
+              >
+                <div class="flex flex-col justify-center gap-1">
+                  <p
+                    class="text-[1.5rem] font-bold text-white opacity-50 md:text-[1rem]"
+                  >
+                    Keluhan aktif
+                  </p>
+                  <span
+                    class="text-[3rem] text-white md:text-[2.7rem]"
+                    id="keluhan-aktif"
+                    >0</span
+                  >
+                </div>
+                <svg
+                  width="37"
+                  height="37"
+                  viewBox="0 0 37 37"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    opacity="0.55"
+                    d="M1.86884 37L0 35.1324L3.29218 29.443L5.42719 29.7559L18.4593 16.7313L17.3477 15.6645C16.7783 15.0956 16.7783 14.2336 17.3477 13.6647L17.9255 13.0858C18.4949 12.5168 19.366 12.5168 19.793 13.0858L21.4839 11.3974C21.3415 10.544 21.4839 9.52985 22.1956 8.81867L29.8901 1.17345C31.4558 -0.391148 34.0178 -0.391148 35.5835 1.17345C37.4338 2.88029 37.4167 5.43202 35.8511 6.99662L28.2006 14.6873C27.4889 15.3985 26.4741 15.683 25.6201 15.3985L23.7513 17.0869C24.1783 17.6558 24.1783 18.5263 23.7513 18.9544L23.2175 19.4864C23.0881 19.6213 22.9328 19.7285 22.7608 19.8018C22.5889 19.8751 22.4038 19.9129 22.2169 19.9129C22.03 19.9129 21.8449 19.8751 21.673 19.8018C21.501 19.7285 21.3457 19.6213 21.2163 19.4864L20.2826 18.5533L7.25049 31.5765L7.56078 33.7101L1.86884 37ZM29.624 36.9559C26.8157 37.1892 23.0923 35.3287 21.3501 33.7115C19.2065 31.5694 19.5567 28.7688 21.2604 26.0649L18.2372 23.0423L20.3723 20.6428C21.5109 21.6385 23.1905 21.6385 24.3291 20.6428L24.9084 20.0653L25.0422 19.9316L26.2877 21.1762C28.861 19.6642 31.5398 19.4466 33.5823 21.4877C35.5749 23.3368 37.7356 27.8969 36.7392 30.5994L32.7368 26.466C32.1675 25.897 31.3049 25.897 30.7356 26.466L26.5979 30.5994C26.463 30.7287 26.3556 30.8839 26.2823 31.0557C26.2089 31.2276 26.1711 31.4125 26.1711 31.5993C26.1711 31.7861 26.2089 31.971 26.2823 32.1428C26.3556 32.3147 26.463 32.4699 26.5979 32.5992L30.737 36.7326C30.3812 36.8578 30.0253 36.9218 29.624 36.9559ZM13.9672 19.2204L8.8062 14.0644C8.25153 14.187 7.68477 14.2466 7.1167 14.2421C3.13135 14.2421 0 11.1129 0 7.13032C0 3.1477 3.13135 0.0184937 7.1167 0.0184937C11.102 0.0184937 14.2334 3.1477 14.2334 7.13032C14.2334 7.85999 14.1181 8.56122 13.9217 9.21978L16.9463 12.2423L16.5022 12.8198C15.3635 13.9577 15.3721 15.6816 16.3684 16.8209L13.9672 19.2204ZM24.9981 12.7302C25.176 12.7302 25.344 12.696 25.4863 12.5524L33.894 4.15189C34.1786 3.86741 34.1786 3.4151 33.894 3.13063C33.6093 2.84616 33.1538 2.84616 32.8692 3.13063L24.4644 11.5311C24.1797 11.8156 24.1797 12.2679 24.4644 12.5524C24.6067 12.6946 24.8202 12.7302 24.9981 12.7302ZM8.09595 10.8214L10.8088 8.10891L9.82958 4.42072L6.13886 3.44213L3.42455 6.15458L4.40381 9.84277L8.09595 10.8214Z"
+                    fill="white"
+                  />
+                </svg>
+              </div>
+            </div>
+            <div
+              class="mt-5 flex flex-col items-center gap-5 rounded-[1rem] bg-white py-10 shadow-[0_0_15px_#00000013]"
+            >
+              <h2 class="font-bold">Aksi Cepat</h2>
+              <div
+                class="flex w-[70%] flex-col items-center gap-5 md:w-full md:flex-row md:px-5"
+              >
+                <div
+                  class="flex w-full cursor-pointer flex-col items-center justify-between gap-1 rounded-[1rem] bg-[#FEF2F2] px-10 py-10"
+                >
+                  <svg
+                    width="31"
+                    height="28"
+                    viewBox="0 0 31 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.13385 12.0742C9.65664 4.02422 11.918 0 15.5 0C19.082 0 21.3434 4.02422 25.8661 12.0742L26.4303 13.076C30.189 19.7649 32.0691 23.1093 30.3703 25.5547C28.6716 28 24.4681 28 16.0642 28H14.9358C6.53192 28 2.32842 28 0.629658 25.5547C-1.0691 23.1093 0.811003 19.7649 4.56966 13.076L5.13385 12.0742ZM15.5 6.61111C15.8083 6.61111 16.104 6.73403 16.322 6.95282C16.54 7.17161 16.6625 7.46836 16.6625 7.77778V15.5556C16.6625 15.865 16.54 16.1617 16.322 16.3805C16.104 16.5993 15.8083 16.7222 15.5 16.7222C15.1917 16.7222 14.896 16.5993 14.678 16.3805C14.46 16.1617 14.3375 15.865 14.3375 15.5556V7.77778C14.3375 7.46836 14.46 7.17161 14.678 6.95282C14.896 6.73403 15.1917 6.61111 15.5 6.61111ZM15.5 21.7778C15.9111 21.7778 16.3053 21.6139 16.596 21.3222C16.8867 21.0304 17.05 20.6348 17.05 20.2222C17.05 19.8097 16.8867 19.414 16.596 19.1223C16.3053 18.8306 15.9111 18.6667 15.5 18.6667C15.0889 18.6667 14.6947 18.8306 14.404 19.1223C14.1133 19.414 13.95 19.8097 13.95 20.2222C13.95 20.6348 14.1133 21.0304 14.404 21.3222C14.6947 21.6139 15.0889 21.7778 15.5 21.7778Z"
+                      fill="#EF4444"
+                    />
+                  </svg>
+                  <p class="text-[0.9rem] font-bold text-[#EF4444]">
+                    Laporkan Keluhan
+                  </p>
+                </div>
+                <div
+                  class="flex w-full cursor-pointer flex-col items-center justify-between gap-1 rounded-[1rem] bg-[#F0FDF4] px-10 py-10"
+                >
+                  <svg
+                    width="33"
+                    height="22"
+                    viewBox="0 0 33 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M32.4884 1.65046C32.33 1.55162 32.149 1.49472 31.9626 1.4851C31.7761 1.47548 31.5903 1.51345 31.4226 1.59546C25.5187 4.48289 21.3023 3.12992 16.8452 1.70271C12.157 0.210864 7.31621 -1.33598 0.617477 1.9337C0.432476 2.02401 0.276532 2.16441 0.167375 2.33893C0.0582179 2.51345 0.000228422 2.71509 1.09138e-08 2.92093V19.4109C-2.62786e-05 19.5976 0.0474432 19.7811 0.137941 19.9444C0.228439 20.1076 0.358989 20.2451 0.517305 20.344C0.675622 20.4429 0.856498 20.4999 1.04291 20.5096C1.22933 20.5193 1.41515 20.4814 1.58289 20.3995C7.48674 17.5121 11.7032 18.8651 16.1672 20.2923C18.8131 21.1379 21.5086 22 24.5561 22C26.9063 22 29.4697 21.4885 32.3825 20.0668C32.5675 19.9765 32.7234 19.8361 32.8326 19.6616C32.9417 19.487 32.9997 19.2854 33 19.0796V2.58956C33.0016 2.40245 32.9555 2.218 32.866 2.05367C32.7765 1.88934 32.6465 1.75056 32.4884 1.65046ZM5.50091 14.3002C5.50091 14.5919 5.385 14.8717 5.17867 15.078C4.97235 15.2843 4.69251 15.4001 4.40073 15.4001C4.10894 15.4001 3.82911 15.2843 3.62278 15.078C3.41646 14.8717 3.30055 14.5919 3.30055 14.3002V5.50037C3.30055 5.20864 3.41646 4.92886 3.62278 4.72257C3.82911 4.51629 4.10894 4.4004 4.40073 4.4004C4.69251 4.4004 4.97235 4.51629 5.17867 4.72257C5.385 4.92886 5.50091 5.20864 5.50091 5.50037V14.3002ZM16.5027 15.4001C15.6323 15.4001 14.7815 15.1421 14.0578 14.6586C13.3341 14.1752 12.7701 13.488 12.437 12.684C12.1039 11.88 12.0168 10.9954 12.1866 10.1419C12.3564 9.28837 12.7755 8.50438 13.3909 7.88905C14.0064 7.27371 14.7905 6.85466 15.6442 6.68489C16.4978 6.51512 17.3827 6.60225 18.1868 6.93527C18.9909 7.26829 19.6782 7.83223 20.1618 8.55579C20.6454 9.27935 20.9035 10.13 20.9035 11.0002C20.9035 12.1672 20.4398 13.2863 19.6145 14.1114C18.7892 14.9366 17.6699 15.4001 16.5027 15.4001ZM29.7049 16.5001C29.7049 16.7919 29.589 17.0716 29.3827 17.2779C29.1763 17.4842 28.8965 17.6001 28.6047 17.6001C28.3129 17.6001 28.0331 17.4842 27.8268 17.2779C27.6205 17.0716 27.5045 16.7919 27.5045 16.5001V7.70032C27.5045 7.40859 27.6205 7.12881 27.8268 6.92252C28.0331 6.71624 28.3129 6.60035 28.6047 6.60035C28.8965 6.60035 29.1763 6.71624 29.3827 6.92252C29.589 7.12881 29.7049 7.40859 29.7049 7.70032V16.5001Z"
+                      fill="#22C55E"
+                    />
+                  </svg>
+
+                  <p class="text-[0.9rem] font-bold text-[#22C55E]">
+                    Bayar Sewa
+                  </p>
+                </div>
+                <div
+                  class="flex w-full cursor-pointer flex-col items-center justify-between gap-1 rounded-[1rem] bg-[#EFF6FF] px-10 py-10"
+                >
+                  <svg
+                    width="39"
+                    height="24"
+                    viewBox="0 0 39 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 1V23M37.6667 23V16.5833H1"
+                      stroke="#3B82F6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M17.5 4.6665V16.5832H37.6667V7.4165C37.6667 6.68716 37.3769 5.98768 36.8612 5.47196C36.3455 4.95623 35.646 4.6665 34.9167 4.6665H17.5Z"
+                      fill="#3B82F6"
+                      stroke="#3B82F6"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M9.25 11.083C10.7688 11.083 12 9.85179 12 8.33301C12 6.81422 10.7688 5.58301 9.25 5.58301C7.73122 5.58301 6.5 6.81422 6.5 8.33301C6.5 9.85179 7.73122 11.083 9.25 11.083Z"
+                      fill="#3B82F6"
+                      stroke="#3B82F6"
+                      stroke-width="2"
+                    />
+                  </svg>
+
+                  <p class="text-[0.9rem] font-bold text-[#3B82F6]">
+                    Info Kamar
+                  </p>
+                </div>
+                <div
+                  class="flex w-full cursor-pointer flex-col items-center justify-between gap-1 rounded-[1rem] bg-[#FAF5FF] px-10 py-10"
+                >
+                  <svg
+                    width="26"
+                    height="24"
+                    viewBox="0 0 26 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.1708 22.559V15.3539H15.8229V22.559C15.8229 23.3515 16.4588 24 17.236 24H21.4751C22.2522 24 22.8881 23.3515 22.8881 22.559V12.4719H25.2902C25.9402 12.4719 26.2511 11.6506 25.7565 11.2183L13.9436 0.367457C13.4066 -0.122486 12.5871 -0.122486 12.0501 0.367457L0.23718 11.2183C-0.243251 11.6506 0.0534859 12.4719 0.703481 12.4719H3.10564V22.559C3.10564 23.3515 3.7415 24 4.51867 24H8.75776C9.53493 24 10.1708 23.3515 10.1708 22.559Z"
+                      fill="#A855F7"
+                    />
+                  </svg>
+
+                  <p class="text-[0.9rem] font-bold text-[#A855F7]">Homepage</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="kamar-saya"
+          class="dashboard-admin-content-section mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <div
+            class="flex flex-col gap-3 rounded-[1rem] bg-white px-5 py-5 shadow-[0_0_15px_#00000013]"
+          >
+            <h1 class="text-[1.2rem] font-bold">Informasi kamar</h1>
+            <div class="flex flex-col gap-5 md:flex-row">
+              <div class="flex flex-col gap-2 md:flex-1">
+                <div
+                  class="flex justify-between rounded-[1rem] bg-[#F9FAFB] px-3 py-3"
+                >
+                  <p class="font-medium">Nama Kamar</p>
+                  <span class="nama-kamar font-bold">01</span>
+                </div>
+                <div
+                  class="flex justify-between rounded-[1rem] bg-[#F9FAFB] px-3 py-3"
+                >
+                  <p class="font-medium">Harga Sewa</p>
+                  <span id="harga-kamar" class="font-bold"
+                    >Rp 1.200.000/bulan</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between rounded-[1rem] bg-[#F9FAFB] px-3 py-3"
+                >
+                  <p class="font-medium">Tanggal Masuk</p>
+                  <span id="tanggal-masuk" class="font-bold"
+                    >01 September 2024</span
+                  >
+                </div>
+                <div
+                  class="flex justify-between rounded-[1rem] bg-[#F9FAFB] px-3 py-3"
+                >
+                  <p class="font-medium">Sewa Berakhir</p>
+                  <span id="sewa-berakhir" class="font-bold"
+                    >01 Februari 2025</span
+                  >
+                </div>
+              </div>
+              <div class="flex flex-col gap-2 md:flex-1">
+                <h3 class="font-semibold text-[#535353]">Fasilitas</h3>
+                <div id="fasilitas-kamar" class="grid grid-cols-3 gap-2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          id="pembayaran"
+          class="dashboard-admin-content-section mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <div class="flex flex-col">
+            <div
+              class="rounded-[1rem] bg-white px-5 py-5 shadow-[0_0_15px_#00000013]"
+            >
+              <h2>Pembayaran</h2>
+              <div>
+                <p>Jadwal Pembayaran</p>
+              </div>
+              <div>
+                <div>
+                  <p>Desember 2025</p>
+                </div>
+              </div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <div
+          id="laporkan-keluhan"
+          class="dashboard-admin-content-section mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <h1>laporkan-keluhan</h1>
+        </div>
+        <div
+          id="pengaturan"
+          class="dashboard-admin-content-section mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <h1>pengaturan</h1>
+        </div>
+        <div
+          id="kembali"
+          class="dashboard-admin-content-section mx-5 pt-5 pb-10 md:mx-5"
+        >
+          <h1>kembali</h1>
+        </div>
+      </div>
+    </div>
+    <script src="js/dashboard-user.js"></script>
   </body>
 </html>

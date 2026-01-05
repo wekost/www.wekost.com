@@ -1,6 +1,6 @@
 .information-section {
   width: 100%;
-  height: 350px;
+  height: 20rem;
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -34,19 +34,18 @@
   display: block;
   flex-shrink: 0;
   object-fit: cover;
-  border-radius: 5px;
 }
 .information-text {
   position: absolute;
   text-align: center;
   color: white;
-  font-size: 24px;
+  font-size: 1.3rem;
   font-weight: bold;
   z-index: 999;
   max-width: 70%;
 }
 .information-text p {
-  font-size: 20px;
+  font-size: 1rem;
   font-weight: normal;
 }
 .information-text-layout {
@@ -55,16 +54,31 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 1.5rem;
   flex-direction: column;
 }
 .information-text-utility {
   display: flex;
-  gap: 30px;
+  gap: 2rem;
 }
 .information-text-utility-item {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 16px;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .information-text {
+    font-size: 0.6rem;
+  }
+  .information-text p {
+    font-size: 0.8rem;
+  }
+  .information-text-layout {
+    gap: 1rem;
+  }
+  .information-text-utility-item p {
+    font-size: 0.5rem;
+  }
 }

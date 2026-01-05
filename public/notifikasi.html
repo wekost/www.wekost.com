@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifikasi</title>
+
+    <link rel="stylesheet" href="css/body.css" />
+    <link rel="stylesheet" href="css/notifikasi.css" />
+
+    <!--tailwind-->
+    <link href="/src/output.css" rel="stylesheet" />
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="min-h-screen">
+    <div
+      id="generate-kode-card"
+      class="fixed inset-0 z-101 flex hidden items-center justify-center"
+    >
+      <div class="absolute inset-0 z-102 bg-black/50"></div>
+      <div
+        class="absolute z-103 flex h-auto w-[80%] flex-col gap-5 rounded-md bg-white px-5 py-5 shadow-md shadow-black/20 md:w-[30%]"
+      >
+        <div
+          id="btn-close-generate-kode"
+          class="absolute top-3 right-3 cursor-pointer rounded-md bg-[#E0E5FF] p-1"
+        >
+          <svg
+            width="24"
+            height="23"
+            viewBox="0 0 24 23"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.84295 7.41294L0.921473 8.33128L0 7.41294L0.921473 6.49461L1.84295 7.41294ZM8.35973 23C8.01405 23 7.68254 22.8631 7.43811 22.6196C7.19369 22.376 7.05637 22.0456 7.05637 21.7011C7.05637 21.3566 7.19369 21.0262 7.43811 20.7826C7.68254 20.539 8.01405 20.4022 8.35973 20.4022V23ZM7.43825 14.8259L0.921473 8.33128L2.76442 6.49461L9.2812 12.9892L7.43825 14.8259ZM0.921473 6.49461L7.43825 0L9.2812 1.83667L2.76442 8.33128L0.921473 6.49461ZM1.84295 6.11402H15.5282V8.71186H1.84295V6.11402ZM15.5282 23H8.35973V20.4022H15.5282V23ZM24 14.557C24 16.7962 23.1074 18.9437 21.5187 20.5271C19.9299 22.1105 17.775 23 15.5282 23V20.4022C16.2984 20.4022 17.0611 20.251 17.7727 19.9572C18.4842 19.6635 19.1308 19.2329 19.6754 18.6902C20.2201 18.1474 20.6521 17.503 20.9468 16.7939C21.2416 16.0847 21.3933 15.3246 21.3933 14.557H24ZM15.5282 6.11402C17.775 6.11402 19.9299 7.00355 21.5187 8.58692C23.1074 10.1703 24 12.3178 24 14.557H21.3933C21.3933 13.7894 21.2416 13.0293 20.9468 12.3202C20.6521 11.611 20.2201 10.9666 19.6754 10.4239C19.1308 9.8811 18.4842 9.45055 17.7727 9.1568C17.0611 8.86305 16.2984 8.71186 15.5282 8.71186V6.11402Z"
+              fill="black"
+            />
+          </svg>
+        </div>
+        <div class="flex justify-center">
+          <p class="max-w-60 text-center text-[1.2rem] font-semibold">
+            Masukan data kamar Penyewa
+          </p>
+        </div>
+        <form id="generate-code-form" class="flex flex-col gap-3">
+          <div class="flex flex-col gap-1">
+            <label for="pilih-kamar-kosong" class="text-[0.8rem] text-[#535353]"
+              >Pilih Kamar Kosong</label
+            >
+            <select
+              name="pilih-kamar-kosong"
+              id="pilih-kamar-kosong"
+              class="cursor-pointer rounded-md bg-white px-3 py-2 font-medium shadow shadow-black/30"
+            ></select>
+          </div>
+          <div class="flex flex-col gap-1">
+            <label for="tanggal-masuk" class="text-[0.8rem] text-[#535353]"
+              >Tanggal Masuk</label
+            >
+            <input
+              type="date"
+              name="tanggal-masuk"
+              id="tanggal-masuk"
+              class="cursor-pointer rounded-md bg-white px-3 py-2 font-medium shadow shadow-black/30"
+            />
+          </div>
+
+          <span
+            id="err_msg_generate"
+            class="flex hidden justify-center text-red-600"
+            >halo</span
+          >
+          <div
+            id="kode-kamar"
+            class="flex hidden items-center justify-center gap-2 font-medium"
+          ></div>
+          <button
+            type="submit"
+            class="cursor-pointer rounded-md bg-[#4D5CFF] py-2 font-semibold text-white hover:bg-[#000C94]"
+          >
+            Buat Kode
+          </button>
+        </form>
+      </div>
+    </div>
+    <div
+      class="sticky z-100 flex h-auto w-full flex-col justify-between gap-4 bg-white px-3 py-3 shadow-md shadow-black/30"
+    >
+      <div class="flex items-center justify-between">
+        <div class="flex flex-col gap-2">
+          <h1 class="text-[1.5rem] font-semibold">Notifikasi</h1>
+          <div class="hidden gap-4 md:flex">
+            <button
+              class="hover-menu hover-active cursor-pointer"
+              id="btn-semua-notifikasi"
+              onclick="
+                (showSection('semua-notifikasi'),
+                  showHovernotifikasi('btn-semua-notifikasi'))
+              "
+              class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+            >
+              Semua
+            </button>
+            <button
+              id="btn-sudah-dibaca-notifikasi"
+              class="hover-menu cursor-pointer"
+              onclick="
+                (showSection('sudah-dibaca-notifikasi'),
+                  showHovernotifikasi('btn-sudah-dibaca-notifikasi'))
+              "
+              class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+            >
+              Sudah Dibaca
+            </button>
+            <button
+              class="hover-menu cursor-pointer"
+              id="btn-belum-dibaca-notifikasi"
+              onclick="
+                (showSection('belum-dibaca-notifikasi'),
+                  showHovernotifikasi('btn-belum-dibaca-notifikasi'))
+              "
+              class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+            >
+              Belum Dibaca
+            </button>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <p class="cursor-pointer text-[#0077FF]">Tandai semua dibaca</p>
+          <svg
+            class="cursor-pointer rounded-md bg-[#E0E5FF] p-1"
+            width="26"
+            height="25"
+            viewBox="0 0 26 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M1.99652 8.05755L0.998262 9.05574L0 8.05755L0.998262 7.05935L1.99652 8.05755ZM9.05637 25C8.68189 25 8.32275 24.8513 8.05796 24.5865C7.79316 24.3217 7.6444 23.9626 7.6444 23.5881C7.6444 23.2137 7.79316 22.8546 8.05796 22.5898C8.32275 22.325 8.68189 22.1763 9.05637 22.1763V25ZM8.05811 16.1151L0.998262 9.05574L2.99479 7.05935L10.0546 14.1187L8.05811 16.1151ZM0.998262 7.05935L8.05811 0L10.0546 1.99639L2.99479 9.05574L0.998262 7.05935ZM1.99652 6.64568H16.8222V9.46942H1.99652V6.64568ZM16.8222 25H9.05637V22.1763H16.8222V25ZM26 15.8228C26 18.2568 25.0331 20.591 23.3119 22.3121C21.5907 24.0331 19.2563 25 16.8222 25V22.1763C17.6566 22.1763 18.4828 22.0119 19.2537 21.6926C20.0246 21.3733 20.725 20.9054 21.3151 20.3154C21.9051 19.7254 22.3731 19.025 22.6924 18.2542C23.0117 17.4834 23.1761 16.6572 23.1761 15.8228H26ZM16.8222 6.64568C19.2563 6.64568 21.5907 7.61255 23.3119 9.3336C25.0331 11.0547 26 13.3889 26 15.8228H23.1761C23.1761 14.9885 23.0117 14.1623 22.6924 13.3915C22.3731 12.6207 21.9051 11.9203 21.3151 11.3303C20.725 10.7403 20.0246 10.2723 19.2537 9.95304C18.4828 9.63375 17.6566 9.46942 16.8222 9.46942V6.64568Z"
+              fill="black"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="flex justify-between gap-3 px-3 md:hidden">
+        <button
+          class="hover-menu hover-active cursor-pointer"
+          id="btn-semua-notifikasi"
+          onclick="
+            (showSection('semua-notifikasi'),
+              showHovernotifikasi('btn-semua-notifikasi'))
+          "
+          class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+        >
+          Semua
+        </button>
+        <button
+          id="btn-sudah-dibaca-notifikasi"
+          class="hover-menu cursor-pointer"
+          onclick="
+            (showSection('sudah-dibaca-notifikasi'),
+              showHovernotifikasi('btn-sudah-dibaca-notifikasi'))
+          "
+          class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+        >
+          Sudah Dibaca
+        </button>
+        <button
+          class="hover-menu cursor-pointer"
+          id="btn-belum-dibaca-notifikasi"
+          onclick="
+            (showSection('belum-dibaca-notifikasi'),
+              showHovernotifikasi('btn-belum-dibaca-notifikasi'))
+          "
+          class="cursor-pointer border-b-2 border-[#535353] text-[#535353]"
+        >
+          Belum Dibaca
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-col gap-2 px-5 py-3">
+      <button
+        id="btn-generate-kode"
+        class="ml-auto cursor-pointer rounded-md bg-[#4D5CFF] px-4 py-2 text-sm font-medium text-white hover:bg-[#000C94]"
+      >
+        Buat Kode Kamar
+      </button>
+      <div id="semua-notifikasi" class="notifikasi">
+        <h1>hello world</h1>
+        <p>anjay</p>
+      </div>
+      <div id="sudah-dibaca-notifikasi" class="notifikasi hidden">
+        <h1>anjay banget</h1>
+      </div>
+      <div id="belum-dibaca-notifikasi" class="notifikasi hidden">
+        <h1>ngeri banget</h1>
+      </div>
+    </div>
+    <script src="js/notifikasi.js"></script>
+  </body>
+</html>

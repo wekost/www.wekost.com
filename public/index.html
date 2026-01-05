@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="css/modal-sigin-user.css" />
     <link rel="stylesheet" href="css/modal-login.css" />
 
+    <!--tailwind-->
+    <link href="/src/output.css" rel="stylesheet" />
+
     <!--font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,28 +24,41 @@
       rel="stylesheet"
     />
   </head>
-  <body>
+
+  <body class="min-h-screen">
     <!--navbar section-->
-    <div class="navbar-section">
-      <div class="navbar-logo">
-        <img src="img/img-widyatama.png" alt="image widyatama" />
-      </div>
-      <div class="form-button">
-        <div class="form-button_login" onclick="showLogin()">
+    <div
+      class="sticky top-0 z-[1001] flex h-15 w-full items-center justify-between bg-white"
+    >
+      <img
+        class="h-30 w-auto"
+        src="/img/img-widyatama.png"
+        alt="image widyatama"
+      />
+      <div class="mr-5 flex flex-row items-center gap-5">
+        <div
+          class="flex cursor-pointer flex-row gap-1.5 hover:text-[#AF73FF]"
+          onclick="showLogin()"
+        >
           <svg
             width="21"
             height="22"
             viewBox="0 0 17 18"
-            fill="none"
+            fill="currentColor"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M8.24996 9C12.192 9 16.237 11.563 16.499 16.712C16.509 16.9105 16.4399 17.1048 16.3068 17.2524C16.1737 17.4 15.9874 17.4887 15.789 17.499C13.709 17.605 4.07596 17.67 0.711962 17.499C0.513319 17.4889 0.326817 17.4003 0.193481 17.2527C0.0601443 17.1052 -0.00910591 16.9106 0.000962457 16.712C0.262962 11.564 4.30796 9 8.24996 9ZM8.24996 0C7.2554 0 6.30157 0.395088 5.59831 1.09835C4.89505 1.80161 4.49996 2.75544 4.49996 3.75C4.49996 4.74456 4.89505 5.69839 5.59831 6.40165C6.30157 7.10491 7.2554 7.5 8.24996 7.5C9.24452 7.5 10.1984 7.10491 10.9016 6.40165C11.6049 5.69839 12 4.74456 12 3.75C12 2.75544 11.6049 1.80161 10.9016 1.09835C10.1984 0.395088 9.24452 0 8.24996 0Z"
             />
           </svg>
-          <p>Login</p>
+          <p class="font-bold">Login</p>
         </div>
-        <button onclick="showrole()">Sign in</button>
+        <button
+          class="cursor-pointer rounded-[0.7rem] bg-black px-5 py-1.5 font-bold text-white hover:text-[#AF73FF]"
+          onclick="showrole()"
+        >
+          Sign in
+        </button>
       </div>
     </div>
 
@@ -259,7 +275,7 @@
                 required
               />
             </div>
-            <span id="error_msg_admin" style="color: red;"></span>
+            <span id="error_msg_admin" style="color: red"></span>
             <button type="submit">Sign In</button>
             <div class="modal-sigin-have-account">
               <p>Already have an account? <a onclick="showLogin()">Login</a></p>
@@ -301,6 +317,7 @@
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 class="icon"
+                asep
               >
                 <path
                   d="M10.0002 3.33325C10.8842 3.33325 11.7321 3.68444 12.3572 4.30956C12.9823 4.93468 13.3335 5.78253 13.3335 6.66659C13.3335 7.55064 12.9823 8.39849 12.3572 9.02361C11.7321 9.64873 10.8842 9.99992 10.0002 9.99992C9.11611 9.99992 8.26826 9.64873 7.64314 9.02361C7.01802 8.39849 6.66683 7.55064 6.66683 6.66659C6.66683 5.78253 7.01802 4.93468 7.64314 4.30956C8.26826 3.68444 9.11611 3.33325 10.0002 3.33325ZM10.0002 11.6666C13.6835 11.6666 16.6668 13.1583 16.6668 14.9999V16.6666H3.3335V14.9999C3.3335 13.1583 6.31683 11.6666 10.0002 11.6666Z"
@@ -415,8 +432,7 @@
                 required
               />
             </div>
-            <span id="error_msg_user" style="color: red; "></span
-            >
+            <span id="error_msg_user" style="color: red"></span>
             <button type="submit">Sign In</button>
             <div class="modal-sigin-have-account">
               <p>Already have an account? <a onclick="showLogin()">Login</a></p>
@@ -500,7 +516,7 @@
                 required
               />
             </div>
-            <span id="error_msg_login" style="color: red;"></span>
+            <span id="error_msg_login" style="color: red"></span>
             <button type="submit">Login</button>
             <div class="modal-sigin-have-account">
               <p>Don't have an account? <a onclick="showrole()">Sign In</a></p>
@@ -600,15 +616,214 @@
         </div>
       </div>
     </div>
-    <button onclick="showrole()">show role</button>
-    <h1>h</h1>
-    <h1>h</h1>
-    <h1>h</h1>
-    <h1>h</h1>
-    <h1>h</h1>
-    <h1>h</h1>
-    <h1>h</h1>
+    <div class="relative flex flex-col">
+      <div class="mt-5 flex flex-col items-center gap-6 pb-80">
+        <div class="flex w-full flex-row items-center gap-3 md:w-auto md:gap-5">
+          <button
+            id="semuaKosanhover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b from-[#000379] to-[#8A38F5] px-2 py-2 text-[0.5rem] font-bold text-[#535353] text-white shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('semuaKosan'), showHover('semuaKosanhover'))"
+          >
+            semua kos
+          </button>
 
-    <script src="js/main.js"></script>
+          <button
+            id="kosanPutrahover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('kosanPutra'), showHover('kosanPutrahover'))"
+          >
+            kosan putra
+          </button>
+
+          <button
+            id="kosanPutrihover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('kosanPutri'), showHover('kosanPutrihover'))"
+          >
+            kosan putri
+          </button>
+
+          <button
+            id="kosanCampuranhover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="
+              (showKosan('kosanCampuran'), showHover('kosanCampuranhover'))
+            "
+          >
+            kosan campuran
+          </button>
+        </div>
+        <div
+          id="semuaKosan"
+          class="kosan-content flex w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="semuaKosanhomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+        <div
+          id="kosanPutra"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanPutrahomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+
+        <div
+          id="kosanPutri"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanPutrihomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+
+        <div
+          id="kosanCampuran"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanCampuranhomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+      </div>
+      <img
+        class="absolute bottom-0 left-0 -z-[5] h-[500px] w-full object-cover md:h-[900px]"
+        src="img/bandung.webp"
+        alt=""
+      />
+    </div>
+    <div class="flex h-auto w-full flex-col items-center gap-6 bg-[#181E27]">
+      <img class="h-auto w-[8rem]" src="img/img-widyatama-white.png" alt="" />
+      <div class="flex flex-col gap-10 px-10 py-5 md:flex-row">
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Widyatama Kampus Kos</h1>
+          <p class="text-[0.9rem] text-white">
+            Platform terpercaya bagi Mahasiswa untuk mencari kosan di Bandung
+          </p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Kontak Kami</h1>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.9669 11.5669C14.8037 11.3932 14.2278 10.8794 13.169 10.1997C12.1025 9.5141 11.3159 9.0866 11.0903 8.98692C11.0704 8.9781 11.0485 8.97486 11.0269 8.97756C11.0053 8.98026 10.9849 8.98879 10.9678 9.00223C10.6044 9.28567 9.99248 9.80629 9.95966 9.83442C9.74779 10.016 9.74779 10.016 9.57435 9.95942C9.26935 9.85942 8.32185 9.35629 7.49623 8.52879C6.6706 7.70129 6.14154 6.73035 6.04154 6.42567C5.98435 6.25192 5.98435 6.25192 6.16654 6.04004C6.19466 6.00723 6.7156 5.39535 6.99904 5.03223C7.01248 5.01513 7.02101 4.99469 7.02371 4.97311C7.02641 4.95152 7.02317 4.92961 7.01435 4.90973C6.91466 4.68379 6.48716 3.89754 5.80154 2.83098C5.12091 1.77254 4.60779 1.1966 4.43404 1.03348C4.41809 1.01843 4.39839 1.00797 4.37699 1.00318C4.3556 0.998398 4.33331 0.999472 4.31248 1.00629C3.70513 1.21502 3.11913 1.48133 2.56248 1.8016C2.02511 2.11399 1.51636 2.47319 1.04216 2.87504C1.02561 2.88912 1.0132 2.90743 1.00626 2.92802C0.999327 2.94861 0.998126 2.9707 1.00279 2.99192C1.0681 3.29629 1.38029 4.56692 2.34904 6.32692C3.33748 8.12317 4.02248 9.04348 5.47404 10.49C6.9256 11.9366 7.87498 12.6629 9.6731 13.6513C11.4331 14.62 12.7044 14.9325 13.0081 14.9972C13.0294 15.0018 13.0515 15.0006 13.0721 14.9937C13.0928 14.9868 13.1111 14.9744 13.1253 14.9579C13.5271 14.4837 13.8862 13.9749 14.1984 13.4375C14.5186 12.8809 14.7849 12.2949 14.9937 11.6875C15.0004 11.6669 15.0014 11.6448 14.9967 11.6236C14.992 11.6024 14.9817 11.5828 14.9669 11.5669Z"
+                fill="white"
+              />
+            </svg>
+            <p class="text-[0.9rem] text-white">+62 999-9999-9999</p>
+          </div>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18.3337 6.27917V14.1667C18.3337 14.8044 18.0901 15.4179 17.6526 15.8819C17.2151 16.3458 16.6169 16.6251 15.9803 16.6625L15.8337 16.6667H4.16699C3.52932 16.6667 2.91573 16.4231 2.45177 15.9856C1.98782 15.5481 1.70857 14.9499 1.67116 14.3133L1.66699 14.1667V6.27917L9.53783 11.5267L9.63449 11.5817C9.74841 11.6373 9.87353 11.6663 10.0003 11.6663C10.1271 11.6663 10.2522 11.6373 10.3662 11.5817L10.4628 11.5267L18.3337 6.27917Z"
+                fill="white"
+              />
+              <path
+                d="M15.8339 3.33337C16.7339 3.33337 17.5231 3.80837 17.9631 4.52254L10.0006 9.83087L2.03809 4.52254C2.24708 4.18323 2.53416 3.89879 2.8754 3.69295C3.21663 3.48711 3.60213 3.36582 3.99975 3.33921L4.16725 3.33337H15.8339Z"
+                fill="white"
+              />
+            </svg>
+            <p class="text-[0.9rem] text-white">wekost@gmail.com</p>
+          </div>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.8337 7.49996C15.8337 6.73391 15.6828 5.97537 15.3896 5.26764C15.0965 4.55991 14.6668 3.91684 14.1251 3.37517C13.5834 2.83349 12.9404 2.40381 12.2326 2.11066C11.5249 1.81751 10.7664 1.66663 10.0003 1.66663C9.23428 1.66663 8.47574 1.81751 7.76801 2.11066C7.06027 2.40381 6.41721 2.83349 5.87554 3.37517C5.33386 3.91684 4.90418 4.55991 4.61103 5.26764C4.31788 5.97537 4.16699 6.73391 4.16699 7.49996C4.16699 8.65579 4.50783 9.73079 5.08783 10.6375H5.08116L10.0003 18.3333L14.9195 10.6375H14.9137C15.5144 9.7013 15.8337 8.61231 15.8337 7.49996ZM10.0003 9.99996C9.33728 9.99996 8.7014 9.73657 8.23256 9.26773C7.76372 8.79889 7.50033 8.163 7.50033 7.49996C7.50033 6.83692 7.76372 6.20103 8.23256 5.73219C8.7014 5.26335 9.33728 4.99996 10.0003 4.99996C10.6634 4.99996 11.2993 5.26335 11.7681 5.73219C12.2369 6.20103 12.5003 6.83692 12.5003 7.49996C12.5003 8.163 12.2369 8.79889 11.7681 9.26773C11.2993 9.73657 10.6634 9.99996 10.0003 9.99996Z"
+                fill="white"
+              />
+            </svg>
+
+            <p class="text-[0.9rem] text-white">Bandung, Jawa Barat</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Jam Oprasional</h1>
+          <div class="flex flex-col gap-1.5">
+            <p class="text-[0.9rem] text-white">
+              Senin - Jumat : 08:00 - 20:00
+            </p>
+            <p class="text-[0.9rem] text-white">Sabtu : 08:00 - 17:00</p>
+            <p class="text-[0.9rem] text-white">Minggu : 10:00 - 15:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex w-full flex-col gap-1 px-20">
+        <hr class="bg-white" />
+        <div class="flex w-full flex-row items-center justify-center gap-2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.91967 6.09337C8.77301 6.13337 8.99301 6.86004 9.00634 7.20004H10.1997C10.1463 5.88004 9.20634 5.07337 7.89967 5.07337C6.42634 5.07337 5.33301 6.00004 5.33301 8.09337C5.33301 9.38671 5.95301 10.92 7.89301 10.92C9.37301 10.92 10.1663 9.82004 10.1863 8.95337H8.99301C8.97301 9.34671 8.69301 9.87337 7.90634 9.91337C7.03301 9.88671 6.66634 9.20671 6.66634 8.09337C6.66634 6.16671 7.51967 6.10671 7.91967 6.09337ZM7.99967 1.33337C4.31967 1.33337 1.33301 4.32004 1.33301 8.00004C1.33301 11.68 4.31967 14.6667 7.99967 14.6667C11.6797 14.6667 14.6663 11.68 14.6663 8.00004C14.6663 4.32004 11.6797 1.33337 7.99967 1.33337ZM7.99967 13.3334C5.05967 13.3334 2.66634 10.94 2.66634 8.00004C2.66634 5.06004 5.05967 2.66671 7.99967 2.66671C10.9397 2.66671 13.333 5.06004 13.333 8.00004C13.333 10.94 10.9397 13.3334 7.99967 13.3334Z"
+              fill="white"
+            />
+          </svg>
+          <p class="text-[0.5rem] text-white">
+            2025 Widyatama Kampus Kos. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="js/index.js"></script>
   </body>
 </html>

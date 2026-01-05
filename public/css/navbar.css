@@ -1,7 +1,7 @@
 .navbar-section {
   position: sticky;
   top: 0;
-  height: 50px;
+  height: 3rem;
   width: 100%;
   display: flex;
   align-items: center;
@@ -10,22 +10,22 @@
   background-color: white;
 }
 .navbar-logo img {
-  height: 140px;
+  height: 8rem;
   width: auto;
 }
 .form-button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 25px;
-  margin-right: 40px;
+  gap: 1.7rem;
+  margin-right: 2rem;
   font-weight: bold;
 }
 .form-button_login {
   color: #374151;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 0.8rem;
   cursor: pointer;
 }
 .form-button_login svg {
@@ -36,8 +36,8 @@
   color: #af73ff;
 }
 .form-button button {
-  padding: 3px 15px;
-  font-size: 15px;
+  padding: 0.3rem 0.8rem;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 10px;
   border: none;
@@ -48,4 +48,9 @@
 
 .form-button button:hover {
   color: #af73ff;
+}
+@media (max-width: 480px) {
+  .form-button {
+    margin-right: 1rem;
+  }
 }

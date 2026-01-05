@@ -1,11 +1,1130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <!--css-->
+    <link rel="stylesheet" href="css/navbar.css" />
+    <link rel="stylesheet" href="css/body.css" />
+    <link rel="stylesheet" href="css/information.css" />
+    <link rel="stylesheet" href="css/modal-role.css" />
+    <link rel="stylesheet" href="css/modal-sigin-admin.css" />
+    <link rel="stylesheet" href="css/modal-sigin-user.css" />
+    <link rel="stylesheet" href="css/modal-login.css" />
+
+    <!--tailwind-->
+    <link href="/src/output.css" rel="stylesheet" />
+
+    <!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>ini udah homepage</h1>
+
+  <body class="min-h-screen">
+    <!--navbar section-->
+    <div
+      class="sticky top-0 z-[1001] flex h-15 w-full items-center justify-between bg-white"
+    >
+      <img
+        class="h-30 w-auto"
+        src="/img/img-widyatama.png"
+        alt="image widyatama"
+      />
+      <div class="mr-5 flex flex-row items-center gap-5">
+        <button
+          class="cursor-pointer rounded-[0.5rem] bg-[#38A244] px-4 py-1.5 text-[0.7rem] font-bold text-white hover:bg-[#035D24]"
+          onclick="showKodepenyewa()"
+        >
+          Kode Kamar
+        </button>
+        <div
+          class="flex cursor-pointer flex-row items-center gap-1.5 hover:text-[#AF73FF]"
+          onclick="logout()"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            fill="currentColor"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M2 18C1.45 18 0.979333 17.8043 0.588 17.413C0.196667 17.0217 0.000666667 16.5507 0 16V2C0 1.45 0.196 0.979333 0.588 0.588C0.98 0.196667 1.45067 0.000666667 2 0H8C8.28333 0 8.521 0.0960001 8.713 0.288C8.905 0.48 9.00067 0.717333 9 1C8.99933 1.28267 8.90333 1.52033 8.712 1.713C8.52067 1.90567 8.28333 2.00133 8 2H2V16H8C8.28333 16 8.521 16.096 8.713 16.288C8.905 16.48 9.00067 16.7173 9 17C8.99933 17.2827 8.90333 17.5203 8.712 17.713C8.52067 17.9057 8.28333 18.0013 8 18H2ZM14.175 10H7C6.71667 10 6.47933 9.904 6.288 9.712C6.09667 9.52 6.00067 9.28267 6 9C5.99933 8.71733 6.09533 8.48 6.288 8.288C6.48067 8.096 6.718 8 7 8H14.175L12.3 6.125C12.1167 5.94167 12.025 5.71667 12.025 5.45C12.025 5.18333 12.1167 4.95 12.3 4.75C12.4833 4.55 12.7167 4.44567 13 4.437C13.2833 4.42833 13.525 4.52433 13.725 4.725L17.3 8.3C17.5 8.5 17.6 8.73333 17.6 9C17.6 9.26667 17.5 9.5 17.3 9.7L13.725 13.275C13.525 13.475 13.2877 13.571 13.013 13.563C12.7383 13.555 12.5007 13.4507 12.3 13.25C12.1167 13.05 12.0293 12.8127 12.038 12.538C12.0467 12.2633 12.1423 12.034 12.325 11.85L14.175 10Z"
+              fill="currentColor"
+            />
+          </svg>
+
+          <p class="font-bold">Logout</p>
+        </div>
+      </div>
+    </div>
+    <div
+      id="kode-penyewa"
+      class="fixed inset-0 z-[1500] flex hidden items-center justify-center"
+    >
+      <div class="absolute inset-0 z-[1501] bg-black/30"></div>
+      <div
+        class="absolute z-[1502] h-auto w-[80%] rounded-md bg-white px-7 py-5 shadow-md shadow-black/30 md:w-[25%]"
+      >
+        <form id="form-kode-penyewa" class="flex flex-col gap-4">
+          <h1 class="flex justify-center font-extrabold">
+            Masukan Kode Penyewa
+          </h1>
+          <p
+            class="bg-[#EFF6FF] px-3 py-1 text-center text-[0.6rem] text-[#0420B8]"
+          >
+            Masukan kode penyewa yang diberikan oleh pemilik kosan setelah
+            boking anda dikonfirmasi
+          </p>
+          <div class="flex flex-col gap-1">
+            <label for="kode-penyewa" class="text-[0.8rem] text-[#535353]"
+              >Kode Penyewa</label
+            >
+            <input
+              type="text"
+              id="kode_penyewa"
+              placeholder="Contoh : KOS-12A-2024"
+              class="h-10 w-full rounded-md border-2 border-[#535353] text-center placeholder:text-[0.8rem]"
+            />
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <button
+              type="submit"
+              class="flex h-8 flex-1 cursor-pointer items-center justify-center gap-1 rounded-md bg-[#16A34A] text-[0.7rem] font-medium text-white hover:bg-[#035D24]"
+            >
+              <svg
+                width="10"
+                height="10"
+                viewBox="0 0 10 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M6.49989 9.31686e-08C6.99609 -0.000114389 7.48663 0.105277 7.93899 0.309182C8.39135 0.513088 8.79519 0.810847 9.12371 1.18271C9.45223 1.55457 9.69793 1.99204 9.8445 2.46608C9.99108 2.94013 10.0352 3.43993 9.9739 3.93232C9.91261 4.42472 9.74732 4.89845 9.489 5.3221C9.23069 5.74575 8.88524 6.10963 8.47558 6.38961C8.06593 6.66959 7.60142 6.85926 7.11287 6.94605C6.62433 7.03283 6.12292 7.01475 5.64189 6.893L2.97289 9.565C2.69228 9.84538 2.31183 10.0029 1.91514 10.0029C1.51846 10.0029 1.13801 9.84538 0.857393 9.565L0.146393 8.854C0.0526576 8.76024 0 8.63308 0 8.5005C0 8.36792 0.0526576 8.24076 0.146393 8.147L0.875393 7.418L0.941393 7.3625C1.01193 7.31293 1.09409 7.28244 1.17989 7.274L1.70539 7.2215L1.77139 6.6735L1.78839 6.59C1.81629 6.49653 1.87091 6.41327 1.94554 6.35045C2.02017 6.28764 2.11154 6.24803 2.20839 6.2365L2.76439 6.169L2.83189 5.6125L2.84839 5.5305C2.87189 5.451 2.91589 5.378 2.97489 5.3185L3.32339 4.97C3.07658 4.43668 2.96802 3.8498 3.00773 3.26349C3.04744 2.67717 3.23414 2.11029 3.55062 1.61512C3.8671 1.11996 4.30316 0.712451 4.81859 0.430183C5.33402 0.147914 5.91223 -2.77177e-05 6.49989 9.31686e-08ZM6.49989 2.5C6.23468 2.5 5.98032 2.60536 5.79279 2.79289C5.60525 2.98043 5.49989 3.23478 5.49989 3.5C5.49989 3.76522 5.60525 4.01957 5.79279 4.20711C5.98032 4.39464 6.23468 4.5 6.49989 4.5C6.76511 4.5 7.01946 4.39464 7.207 4.20711C7.39454 4.01957 7.49989 3.76522 7.49989 3.5C7.49989 3.23478 7.39454 2.98043 7.207 2.79289C7.01946 2.60536 6.76511 2.5 6.49989 2.5Z"
+                  fill="white"
+                />
+              </svg>
+
+              <p>Masuk Dashboard</p>
+            </button>
+            <button
+              id="btn-close-penyewa"
+              class="h-8 flex-1 cursor-pointer rounded-md bg-[#8F9AB1] text-[0.7rem] font-medium text-white hover:bg-[#4C4C4C]"
+            >
+              Batal
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      id="modal-loading"
+      class="fixed inset-0 z-[2000] hidden items-center justify-center bg-white/60"
+    >
+      <div
+        class="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500"
+      ></div>
+    </div>
+    <div
+      id="semua-kamar"
+      class="fixed inset-0 z-[1500] flex hidden items-center justify-center"
+    >
+      <div class="absolute z-[1501] h-full w-full bg-black/50"></div>
+      <div
+        class="absolute z-[1502] flex max-h-[80%] max-w-[80%] flex-col gap-4 overflow-y-auto rounded-[0.7rem] bg-white px-5 py-5 [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[90%] md:w-[40%] [&::-webkit-scrollbar]:hidden"
+      >
+        <div
+          class="absolute top-4 right-5 flex h-7 w-7 cursor-pointer items-center justify-center rounded-md bg-[#754FA8]"
+          onclick="closeModalSemuaKamar()"
+        >
+          <p class="text-[1.5rem] font-bold text-white">x</p>
+        </div>
+        <h1 id="nama-kosan-modal" class="text-left text-[1rem] font-bold"></h1>
+        <div class="flex flex-col gap-5">
+          <img
+            id="gambar-kosan-modal"
+            class="h-[160px] w-full rounded-md object-cover"
+            src=""
+            alt=""
+          />
+          <div class="flex flex-col gap-2 md:flex-row md:justify-between">
+            <div
+              class="flex max-w-full flex-col gap-2 rounded-md bg-white px-3 py-3 shadow-md shadow-black/30 md:flex-1"
+            >
+              <h2 class="text-[0.8rem] font-bold">Informasi Kosan</h2>
+              <div class="flex flex-col gap-0.5">
+                <div class="flex justify-between">
+                  <p class="text-[0.8rem]">Harga mulai dari</p>
+                  <p
+                    id="harga-kosan-modal"
+                    class="text-[0.8rem] font-bold text-[#0900FF]"
+                  ></p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-[0.8rem]">Ketersediaan</p>
+                  <p
+                    id="ketersediaan-modal-kamar"
+                    class="text-[0.8rem] font-bold text-[#535353]"
+                  ></p>
+                </div>
+                <div class="flex justify-between">
+                  <p class="text-[0.8rem]">Total Kamar</p>
+                  <p
+                    id="total-kamar-modal"
+                    class="text-[0.8rem] font-bold text-[#535353]"
+                  ></p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex max-w-full flex-col gap-2 rounded-md bg-white px-3 py-3 shadow-md shadow-black/30 md:flex-1"
+            >
+              <h2 class="text-[0.8rem] font-bold">Fasilitas Kosan</h2>
+              <div
+                id="fasilitas-kamar-modal"
+                class="flex flex-col items-start gap-3"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-5">
+          <div
+            id="kamar-kurang-dari-delapan-ratus-lima-puluh"
+            class="flex hidden flex-col gap-1"
+          >
+            <h2 class="text-[0.8rem] font-bold">Daftar Kamar Kurang Dari</h2>
+            <p class="text-[0.8rem] text-[#0077FF]">RP 850.000</p>
+            <div
+              id="list-kamar-delapan-ratus-lima-puluh"
+              class="flex flex-row flex-wrap items-center gap-2"
+            ></div>
+          </div>
+          <div
+            id="kamar-kurang-dari-satu-juta-dua-ratus"
+            class="flex hidden flex-col gap-1"
+          >
+            <h2 class="text-[0.8rem] font-bold">Daftar Kamar Kurang Dari</h2>
+            <p class="text-[0.8rem] text-[#0077FF]">RP 1.200.000</p>
+            <div
+              id="list-kamar-satu-juta-dua-ratus"
+              class="flex flex-row flex-wrap items-center gap-2"
+            ></div>
+          </div>
+          <div
+            id="kamar-lebih-dari-satu-juta-dua-ratus"
+            class="flex hidden flex-col gap-1"
+          >
+            <h2 class="text-[0.8rem] font-bold">Daftar Kamar lebih Dari</h2>
+            <p class="text-[0.8rem] text-[#0077FF]">RP 1.200.000</p>
+            <div
+              id="list-kamar-lebih-dari-satu-juta-dua-ratus"
+              class="flex flex-row flex-wrap items-center gap-2"
+            ></div>
+          </div>
+        </div>
+        <div class="flex gap-2">
+          <button
+            class="flex flex-1 cursor-pointer items-center justify-center gap-3 rounded-md bg-[#22C55E] py-2"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M11.2157 13.1351C10.6057 13.1351 9.74881 12.9281 8.46568 12.2555C6.90537 11.4345 5.69849 10.6766 4.14662 9.22437C2.65037 7.82141 1.92224 6.91308 0.903181 5.17323C-0.248069 3.20879 -0.0518188 2.17908 0.167556 1.73899C0.428806 1.21299 0.814431 0.898384 1.31287 0.586127C1.59598 0.412094 1.89558 0.262909 2.20787 0.140464C2.23912 0.127856 2.26818 0.115835 2.29412 0.104987C2.44881 0.0396031 2.68318 -0.0592051 2.98006 0.0463467C3.17818 0.116128 3.35506 0.258916 3.63193 0.515466C4.19974 1.04088 4.97568 2.21104 5.26193 2.78571C5.45412 3.17302 5.58131 3.42869 5.58162 3.71544C5.58162 4.05116 5.40162 4.31005 5.18318 4.58947C5.14224 4.64195 5.10162 4.69209 5.06224 4.74076C4.82443 5.03396 4.77224 5.1187 4.80662 5.26999C4.87631 5.57403 5.39599 6.47914 6.25006 7.2787C7.10412 8.07825 8.04099 8.53505 8.36631 8.60014C8.53443 8.63386 8.62662 8.58285 8.94912 8.3518C8.99537 8.31867 9.04287 8.28437 9.09256 8.25006C9.42568 8.01756 9.68881 7.85307 10.0382 7.85307H10.0401C10.3441 7.85307 10.6044 7.9768 11.0357 8.18087C11.5982 8.44709 12.8829 9.16573 13.4463 9.69906C13.7204 9.95824 13.8732 10.1236 13.9479 10.3092C14.0604 10.5886 13.9544 10.8076 13.8854 10.9542C13.8738 10.9786 13.861 11.0053 13.8476 11.0349C13.716 11.3274 13.5561 11.6079 13.3697 11.8728C13.0376 12.339 12.701 12.7 12.1391 12.9454C11.8506 13.0734 11.5348 13.1383 11.2157 13.1351Z"
+                fill="white"
+              />
+            </svg>
+
+            <p class="text-[0.6rem] font-bold text-white">Hubungi Pemilik</p>
+          </button>
+          <button
+            class="flex flex-1 cursor-pointer items-center justify-center gap-3 rounded-md bg-[#15008D] py-2"
+          >
+            <svg
+              width="18"
+              height="14"
+              viewBox="0 0 18 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.900391 7.27808H17.0996C17.2859 7.27808 17.4084 7.27852 17.498 7.28394C17.4986 7.32156 17.5 7.36548 17.5 7.41968V10.6296C17.5 11.2542 17.4975 11.6524 17.4424 11.9451C17.394 12.2015 17.3161 12.3186 17.1826 12.4138C17.0254 12.5259 16.7859 12.6081 16.3271 12.6521C15.8667 12.6963 15.259 12.697 14.4004 12.697H3.59961C2.74103 12.697 2.1333 12.6963 1.67285 12.6521C1.21413 12.6081 0.974579 12.5259 0.817383 12.4138C0.68395 12.3186 0.605977 12.2015 0.557617 11.9451C0.502466 11.6524 0.500001 11.2542 0.5 10.6296V7.41968C0.5 7.36549 0.500395 7.32157 0.500977 7.28394C0.590626 7.27849 0.713305 7.27808 0.900391 7.27808ZM3.59961 2.78394H14.4004C15.259 2.78394 15.8667 2.78468 16.3271 2.82886C16.7859 2.87287 17.0254 2.95501 17.1826 3.06714C17.3161 3.1624 17.394 3.27945 17.4424 3.53589C17.4975 3.82853 17.5 4.22674 17.5 4.85132C17.5 4.90491 17.4986 4.94874 17.498 4.98608C17.4084 4.99151 17.2859 4.9939 17.0996 4.9939H0.900391C0.713251 4.9939 0.590634 4.99154 0.500977 4.98608C0.500414 4.94874 0.5 4.9049 0.5 4.85132C0.500001 4.22674 0.502451 3.82853 0.557617 3.53589C0.605983 3.27945 0.683921 3.1624 0.817383 3.06714C0.974578 2.95501 1.21413 2.87287 1.67285 2.82886C1.90317 2.80676 2.17032 2.79545 2.4873 2.78979L3.59961 2.78394Z"
+                fill="white"
+                stroke="white"
+              />
+              <path d="M4.5 1V2.92586V1ZM13.5 1V2.92586V1Z" fill="white" />
+              <path
+                d="M4.5 1V2.92586M13.5 1V2.92586"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p class="text-[0.6rem] font-bold text-white">Booking Sekarang</p>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--ini modal kamar belum beres-->
+    <div
+      id="modal-kamar"
+      class="fixed inset-0 z-[1600] flex hidden items-center justify-center"
+    >
+      <div class="absolute z-[1601] h-full w-full bg-black/50"></div>
+      <div
+        class="absolute z-[1602] flex max-h-[80%] max-w-[80%] flex-col gap-4 overflow-y-auto rounded-[0.7rem] bg-white px-5 py-5 [-ms-overflow-style:none] [scrollbar-width:none] md:max-h-[90%] md:w-[40%] [&::-webkit-scrollbar]:hidden"
+      >
+        <div
+          class="absolute top-4 right-5 flex h-7 w-7 cursor-pointer items-center justify-center rounded-md bg-[#754FA8]"
+          onclick="closeModalKamar()"
+        >
+          <p class="text-[1.5rem] font-bold text-white">x</p>
+        </div>
+        <h1
+          id="nama-kamar-modal"
+          class="text-left text-[1.3rem] font-bold"
+        ></h1>
+        <img
+          id="img-kamar-modal"
+          class="h-[160px] w-full rounded-md object-cover"
+          src=""
+          alt=""
+        />
+        <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-1">
+            <div class="flex items-center justify-between">
+              <h2 class="text-[1rem] font-bold">Deskripsi Kamar</h2>
+              <h2
+                id="harga-kamar-modal"
+                class="text-[1.2rem] font-bold text-[#0077FF]"
+              ></h2>
+            </div>
+            <p
+              id="deskripsi-kamar-modal"
+              class="text-[0.8rem] text-[#535353]"
+            ></p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h2 class="text-[1rem] font-bold">Fasilitas Kamar</h2>
+            <div
+              class="grid w-full grid-cols-1 place-content-center place-items-center gap-2 md:grid-cols-2"
+            >
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+              <div
+                class="flex w-full justify-center rounded-md bg-[#EFF6FF] py-2"
+              >
+                <p class="text-[#535353]">wifi</p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="w-full cursor-pointer rounded-md bg-[#22C55E] py-2.5 font-bold text-white"
+          >
+            Hubungi Pemilik
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!--modal role section-->
+
+    <div id="modal-role">
+      <div class="modal-overlay"></div>
+      <div class="modal-card">
+        <div class="modal-close" onclick="closeRole()">
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 19 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.3438 1.5L1.5 17.3438M1.5 1.5L17.3438 17.3438"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h1>Pilih tipe Akun</h1>
+        <p>Silahkan pilih jenis akun anda</p>
+        <div class="modal-role-button">
+          <div class="modal-role-button-user">
+            <button onclick="showSiginuser()">
+              <div class="modal-role-button-user-content">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M12 12.75C15.942 12.75 19.987 15.313 20.249 20.462C20.259 20.6605 20.1899 20.8548 20.0568 21.0024C19.9237 21.15 19.7374 21.2387 19.539 21.249C17.459 21.355 7.82596 21.42 4.46196 21.249C4.26332 21.2389 4.07682 21.1503 3.94348 21.0027C3.81014 20.8552 3.74089 20.6606 3.75096 20.462C4.01296 15.314 8.05796 12.75 12 12.75ZM12 3.75C11.0054 3.75 10.0516 4.14509 9.34831 4.84835C8.64505 5.55161 8.24996 6.50544 8.24996 7.5C8.24996 8.49456 8.64505 9.44839 9.34831 10.1517C10.0516 10.8549 11.0054 11.25 12 11.25C12.9945 11.25 13.9484 10.8549 14.6516 10.1517C15.3549 9.44839 15.75 8.49456 15.75 7.5C15.75 6.50544 15.3549 5.55161 14.6516 4.84835C13.9484 4.14509 12.9945 3.75 12 3.75Z"
+                    fill="white"
+                  />
+                </svg>
+                <p>Sebagai Pengguna</p>
+              </div>
+            </button>
+          </div>
+          <div class="modal-role-button-owner">
+            <button onclick="showSiginadmin()">
+              <div class="modal-role-button-user-content">
+                <svg
+                  width="21"
+                  height="19"
+                  viewBox="0 0 21 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11.4116 3.23594C11.747 2.96504 11.9585 2.5457 11.9585 2.07812C11.9585 1.25801 11.3059 0.59375 10.5002 0.59375C9.69443 0.59375 9.04183 1.25801 9.04183 2.07812C9.04183 2.5457 9.25693 2.96504 9.58871 3.23594L7.09495 7.22891C6.73037 7.81152 5.95381 7.95625 5.41058 7.54063L3.24131 5.88926C3.40537 5.65176 3.50016 5.35859 3.50016 5.04688C3.50016 4.22676 2.84756 3.5625 2.04183 3.5625C1.2361 3.5625 0.583496 4.22676 0.583496 5.04688C0.583496 5.85586 1.22152 6.51641 2.01266 6.53125L3.2012 14.6025C3.37256 15.7641 4.35329 16.625 5.50902 16.625H15.4913C16.647 16.625 17.6278 15.7641 17.7991 14.6025L18.9877 6.53125C19.7788 6.51641 20.4168 5.85586 20.4168 5.04688C20.4168 4.22676 19.7642 3.5625 18.9585 3.5625C18.1528 3.5625 17.5002 4.22676 17.5002 5.04688C17.5002 5.35859 17.595 5.65176 17.759 5.88926L15.5934 7.54434C15.0502 7.95996 14.2736 7.81523 13.909 7.23262L11.4116 3.23594Z"
+                    fill="white"
+                  />
+                </svg>
+                <p>Sebagai Pemilik Kosan</p>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--modal sign in admin-->
+    <div id="modal-sigin-admin">
+      <div class="modal-overlay"></div>
+      <div class="modal-card">
+        <div class="modal-close" onclick="closeRole()">
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 19 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.3438 1.5L1.5 17.3438M1.5 1.5L17.3438 17.3438"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h1>Sign In Admin</h1>
+        <form id="form-signin-admin">
+          <div class="modal-card-form">
+            <div class="input-group">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M10.0002 3.33325C10.8842 3.33325 11.7321 3.68444 12.3572 4.30956C12.9823 4.93468 13.3335 5.78253 13.3335 6.66659C13.3335 7.55064 12.9823 8.39849 12.3572 9.02361C11.7321 9.64873 10.8842 9.99992 10.0002 9.99992C9.11611 9.99992 8.26826 9.64873 7.64314 9.02361C7.01802 8.39849 6.66683 7.55064 6.66683 6.66659C6.66683 5.78253 7.01802 4.93468 7.64314 4.30956C8.26826 3.68444 9.11611 3.33325 10.0002 3.33325ZM10.0002 11.6666C13.6835 11.6666 16.6668 13.1583 16.6668 14.9999V16.6666H3.3335V14.9999C3.3335 13.1583 6.31683 11.6666 10.0002 11.6666Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="text"
+                name="name_admin"
+                id="name_admin"
+                placeholder="Name"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16.5 4.5C16.5 3.675 15.825 3 15 3H3C2.175 3 1.5 3.675 1.5 4.5V13.5C1.5 14.325 2.175 15 3 15H15C15.825 15 16.5 14.325 16.5 13.5V4.5ZM15 4.5L9 8.25L3 4.5H15ZM15 13.5H3V6L9 9.75L15 6V13.5Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="email"
+                name="email_admin"
+                id="email_admin"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M10.0002 3.33325C10.8842 3.33325 11.7321 3.68444 12.3572 4.30956C12.9823 4.93468 13.3335 5.78253 13.3335 6.66659C13.3335 7.55064 12.9823 8.39849 12.3572 9.02361C11.7321 9.64873 10.8842 9.99992 10.0002 9.99992C9.11611 9.99992 8.26826 9.64873 7.64314 9.02361C7.01802 8.39849 6.66683 7.55064 6.66683 6.66659C6.66683 5.78253 7.01802 4.93468 7.64314 4.30956C8.26826 3.68444 9.11611 3.33325 10.0002 3.33325ZM10.0002 11.6666C13.6835 11.6666 16.6668 13.1583 16.6668 14.9999V16.6666H3.3335V14.9999C3.3335 13.1583 6.31683 11.6666 10.0002 11.6666Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="number"
+                name="whatsapp_number_admin"
+                id="whatsapp_number_admin"
+                placeholder="Whatsapp number"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16 12H17.4C17.5591 12 17.7117 12.0632 17.8243 12.1757C17.9368 12.2883 18 12.4409 18 12.6V19.4C18 19.5591 17.9368 19.7117 17.8243 19.8243C17.7117 19.9368 17.5591 20 17.4 20H6.6C6.44087 20 6.28826 19.9368 6.17574 19.8243C6.06321 19.7117 6 19.5591 6 19.4V12.6C6 12.4409 6.06321 12.2883 6.17574 12.1757C6.28826 12.0632 6.44087 12 6.6 12H8M16 12V8C16 6.667 15.2 4 12 4C8.8 4 8 6.667 8 8V12M16 12H8"
+                  stroke="#535353"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <input
+                type="password"
+                name="password_admin"
+                id="password_admin"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16 12H17.4C17.5591 12 17.7117 12.0632 17.8243 12.1757C17.9368 12.2883 18 12.4409 18 12.6V19.4C18 19.5591 17.9368 19.7117 17.8243 19.8243C17.7117 19.9368 17.5591 20 17.4 20H6.6C6.44087 20 6.28826 19.9368 6.17574 19.8243C6.06321 19.7117 6 19.5591 6 19.4V12.6C6 12.4409 6.06321 12.2883 6.17574 12.1757C6.28826 12.0632 6.44087 12 6.6 12H8M16 12V8C16 6.667 15.2 4 12 4C8.8 4 8 6.667 8 8V12M16 12H8"
+                  stroke="#535353"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <input
+                type="password"
+                name="confirm_password_admin"
+                id="confirm_password_admin"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+            <span id="error_msg_admin" style="color: red"></span>
+            <button type="submit">Sign In</button>
+            <div class="modal-sigin-have-account">
+              <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--modal sign in user-->
+    <div id="modal-sigin-user">
+      <div class="modal-overlay"></div>
+      <div class="modal-card">
+        <div class="modal-close" onclick="closeRole()">
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 19 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.3438 1.5L1.5 17.3438M1.5 1.5L17.3438 17.3438"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h1>Sign In User</h1>
+        <form id="form-signin-user">
+          <div class="modal-card-form">
+            <div class="input-group">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+                asep
+              >
+                <path
+                  d="M10.0002 3.33325C10.8842 3.33325 11.7321 3.68444 12.3572 4.30956C12.9823 4.93468 13.3335 5.78253 13.3335 6.66659C13.3335 7.55064 12.9823 8.39849 12.3572 9.02361C11.7321 9.64873 10.8842 9.99992 10.0002 9.99992C9.11611 9.99992 8.26826 9.64873 7.64314 9.02361C7.01802 8.39849 6.66683 7.55064 6.66683 6.66659C6.66683 5.78253 7.01802 4.93468 7.64314 4.30956C8.26826 3.68444 9.11611 3.33325 10.0002 3.33325ZM10.0002 11.6666C13.6835 11.6666 16.6668 13.1583 16.6668 14.9999V16.6666H3.3335V14.9999C3.3335 13.1583 6.31683 11.6666 10.0002 11.6666Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="text"
+                name="name_user"
+                id="name_user"
+                placeholder="Name"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16.5 4.5C16.5 3.675 15.825 3 15 3H3C2.175 3 1.5 3.675 1.5 4.5V13.5C1.5 14.325 2.175 15 3 15H15C15.825 15 16.5 14.325 16.5 13.5V4.5ZM15 4.5L9 8.25L3 4.5H15ZM15 13.5H3V6L9 9.75L15 6V13.5Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="email"
+                name="email_user"
+                id="email_user"
+                placeholder="Email"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M10.0002 3.33325C10.8842 3.33325 11.7321 3.68444 12.3572 4.30956C12.9823 4.93468 13.3335 5.78253 13.3335 6.66659C13.3335 7.55064 12.9823 8.39849 12.3572 9.02361C11.7321 9.64873 10.8842 9.99992 10.0002 9.99992C9.11611 9.99992 8.26826 9.64873 7.64314 9.02361C7.01802 8.39849 6.66683 7.55064 6.66683 6.66659C6.66683 5.78253 7.01802 4.93468 7.64314 4.30956C8.26826 3.68444 9.11611 3.33325 10.0002 3.33325ZM10.0002 11.6666C13.6835 11.6666 16.6668 13.1583 16.6668 14.9999V16.6666H3.3335V14.9999C3.3335 13.1583 6.31683 11.6666 10.0002 11.6666Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="number"
+                name="whatsapp_number_user"
+                id="whatsapp_number_user"
+                placeholder="Whatsapp number"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16 12H17.4C17.5591 12 17.7117 12.0632 17.8243 12.1757C17.9368 12.2883 18 12.4409 18 12.6V19.4C18 19.5591 17.9368 19.7117 17.8243 19.8243C17.7117 19.9368 17.5591 20 17.4 20H6.6C6.44087 20 6.28826 19.9368 6.17574 19.8243C6.06321 19.7117 6 19.5591 6 19.4V12.6C6 12.4409 6.06321 12.2883 6.17574 12.1757C6.28826 12.0632 6.44087 12 6.6 12H8M16 12V8C16 6.667 15.2 4 12 4C8.8 4 8 6.667 8 8V12M16 12H8"
+                  stroke="#535353"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <input
+                type="password"
+                name="password_user"
+                id="password_user"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <div class="input-group">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16 12H17.4C17.5591 12 17.7117 12.0632 17.8243 12.1757C17.9368 12.2883 18 12.4409 18 12.6V19.4C18 19.5591 17.9368 19.7117 17.8243 19.8243C17.7117 19.9368 17.5591 20 17.4 20H6.6C6.44087 20 6.28826 19.9368 6.17574 19.8243C6.06321 19.7117 6 19.5591 6 19.4V12.6C6 12.4409 6.06321 12.2883 6.17574 12.1757C6.28826 12.0632 6.44087 12 6.6 12H8M16 12V8C16 6.667 15.2 4 12 4C8.8 4 8 6.667 8 8V12M16 12H8"
+                  stroke="#535353"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <input
+                type="password"
+                name="confirm_password_user"
+                id="confirm_password_user"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+            <span id="error_msg_user" style="color: red"></span>
+            <button type="submit">Sign In</button>
+            <div class="modal-sigin-have-account">
+              <p>Already have an account? <a onclick="showLogin()">Login</a></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--modal login-->
+    <div id="modal-login">
+      <div class="modal-overlay"></div>
+      <div class="modal-card">
+        <div class="modal-close" onclick="closeRole()">
+          <svg
+            width="19"
+            height="19"
+            viewBox="0 0 19 19"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17.3438 1.5L1.5 17.3438M1.5 1.5L17.3438 17.3438"
+              stroke="white"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <h1>Login</h1>
+        <form id="form-login">
+          <div class="modal-card-form">
+            <div class="input-group">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16.5 4.5C16.5 3.675 15.825 3 15 3H3C2.175 3 1.5 3.675 1.5 4.5V13.5C1.5 14.325 2.175 15 3 15H15C15.825 15 16.5 14.325 16.5 13.5V4.5ZM15 4.5L9 8.25L3 4.5H15ZM15 13.5H3V6L9 9.75L15 6V13.5Z"
+                  fill="#535353"
+                />
+              </svg>
+
+              <input
+                type="email"
+                name="email_login"
+                id="email_login"
+                placeholder="Email"
+                required
+              />
+            </div>
+
+            <div class="input-group">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon"
+              >
+                <path
+                  d="M16 12H17.4C17.5591 12 17.7117 12.0632 17.8243 12.1757C17.9368 12.2883 18 12.4409 18 12.6V19.4C18 19.5591 17.9368 19.7117 17.8243 19.8243C17.7117 19.9368 17.5591 20 17.4 20H6.6C6.44087 20 6.28826 19.9368 6.17574 19.8243C6.06321 19.7117 6 19.5591 6 19.4V12.6C6 12.4409 6.06321 12.2883 6.17574 12.1757C6.28826 12.0632 6.44087 12 6.6 12H8M16 12V8C16 6.667 15.2 4 12 4C8.8 4 8 6.667 8 8V12M16 12H8"
+                  stroke="#535353"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <input
+                type="password"
+                name="password_login"
+                id="password_login"
+                placeholder="Password"
+                required
+              />
+            </div>
+            <span id="error_msg_login" style="color: red"></span>
+            <button type="submit">Login</button>
+            <div class="modal-sigin-have-account">
+              <p>Don't have an account? <a onclick="showrole()">Sign In</a></p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!--information-scroll-section-->
+    <div class="information-section">
+      <div class="information-overlay"></div>
+      <div class="information-img" id="slider">
+        <img src="img/gambar-1.png" />
+        <img src="img/gambar-2.png" />
+        <img src="img/gambar-3.png" />
+        <img src="img/gambar-1.png" />
+        <img src="img/gambar-2.png" />
+        <img src="img/gambar-3.png" />
+      </div>
+      <div class="information-text">
+        <div class="information-text-layout">
+          <h1>Temukan kosan impianmu di sini</h1>
+          <p>
+            Kosan nyaman, aman, dan strategis di sekitar Universitas Widyatama
+            dengan harga yang terjangkau
+          </p>
+          <div class="information-text-utility">
+            <div class="information-text-utility-item">
+              <svg
+                width="12"
+                height="15"
+                viewBox="0 0 12 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.95607 14.0126C6.73823 14.0126 7.51273 13.8314 8.23535 13.4793C8.95798 13.1272 9.61457 12.6111 10.1676 11.9605C10.7207 11.3099 11.1594 10.5376 11.4588 9.68752C11.7581 8.83747 11.9121 7.9264 11.9121 7.00632C11.9121 6.08623 11.7581 5.17516 11.4588 4.32512C11.1594 3.47507 10.7207 2.7027 10.1676 2.0521C9.61457 1.40151 8.95798 0.885424 8.23535 0.533324C7.51273 0.181224 6.73823 -1.37103e-08 5.95607 0C4.37642 2.76892e-08 2.86147 0.738163 1.74449 2.0521C0.627512 3.36604 0 5.14813 0 7.00632C0 8.86451 0.627512 10.6466 1.74449 11.9605C2.86147 13.2745 4.37642 14.0126 5.95607 14.0126ZM9.11146 5.1691C9.16956 5.09098 9.21379 4.99997 9.24156 4.90144C9.26932 4.80291 9.28005 4.69884 9.27311 4.59535C9.26618 4.49187 9.24172 4.39106 9.20118 4.29886C9.16064 4.20666 9.10483 4.12493 9.03704 4.05848C8.96925 3.99203 8.89085 3.94219 8.80644 3.91191C8.72204 3.88163 8.63333 3.87151 8.54556 3.88214C8.45778 3.89278 8.37269 3.92396 8.29531 3.97385C8.21793 4.02374 8.14981 4.09133 8.09496 4.17265L5.71385 7.53335C5.48421 7.85719 5.35517 8.03702 5.25259 8.14679L5.24862 8.15146L5.24399 8.14757C5.13281 8.0487 4.99052 7.88366 4.73772 7.58551L3.77681 6.45593C3.65199 6.31413 3.48483 6.23566 3.31131 6.23743C3.13779 6.23921 2.97181 6.32108 2.84911 6.46541C2.7264 6.60975 2.65681 6.805 2.6553 7.00912C2.65379 7.21323 2.72049 7.40988 2.84104 7.5567L3.80129 8.68628L3.82843 8.71819C4.04483 8.97276 4.25197 9.2172 4.44587 9.38924C4.66228 9.5823 4.94618 9.76291 5.3095 9.74423C5.67348 9.72477 5.94217 9.5138 6.14335 9.29894C6.32203 9.10665 6.51064 8.84119 6.70587 8.56483L6.73036 8.53058L9.11146 5.1691Z"
+                  fill="#FFFAFA"
+                />
+              </svg>
+              <p>Dekat kampus</p>
+            </div>
+
+            <div class="information-text-utility-item">
+              <svg
+                width="14"
+                height="15"
+                viewBox="0 0 14 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.87239 14.0126C6.44952 14.0126 6.0921 13.8134 5.80012 13.415C5.50814 13.0166 5.36215 12.5289 5.36215 11.952C5.36215 11.375 5.50814 10.8873 5.80012 10.4889C6.0921 10.0905 6.44952 9.89127 6.87239 9.89127C7.29525 9.89127 7.65268 10.0905 7.94466 10.4889C8.23664 10.8873 8.38263 11.375 8.38263 11.952C8.38263 12.5289 8.23664 13.0166 7.94466 13.415C7.65268 13.8134 7.29525 14.0126 6.87239 14.0126ZM6.87239 4.94563C7.62751 4.94563 8.34497 5.11049 9.02478 5.4402C9.70459 5.76991 10.3212 6.22326 10.8745 6.80025C11.0759 7.00632 11.1792 7.27778 11.1844 7.61463C11.1897 7.95148 11.1015 8.24328 10.9198 8.49001C10.7487 8.72355 10.5372 8.84389 10.2855 8.85104C10.0338 8.85818 9.80728 8.76531 9.60592 8.57243C9.22332 8.21525 8.80046 7.93362 8.33732 7.72755C7.87418 7.52149 7.38587 7.41845 6.87239 7.41845C6.3589 7.41845 5.87059 7.52149 5.40745 7.72755C4.94431 7.93362 4.52145 8.21525 4.13885 8.57243C3.93749 8.76476 3.71095 8.85406 3.45924 8.84032C3.20754 8.82659 2.9961 8.70294 2.82494 8.4694C2.65378 8.22212 2.5682 7.93033 2.5682 7.59402C2.5682 7.25772 2.66888 6.98626 2.87025 6.77964C3.424 6.20265 4.04079 5.7526 4.7206 5.42948C5.40041 5.10637 6.11767 4.94509 6.87239 4.94563ZM6.87239 0C8.13092 0 9.31656 0.281627 10.4293 0.844879C11.542 1.40813 12.5412 2.20493 13.4268 3.23527C13.6282 3.46881 13.7339 3.75731 13.744 4.10076C13.754 4.4442 13.6685 4.73957 13.4872 4.98685C13.3161 5.22039 13.1046 5.34074 12.8529 5.34788C12.6012 5.35502 12.3747 5.24842 12.1733 5.02806C11.4484 4.21753 10.6355 3.58916 9.73459 3.14295C8.83368 2.69675 7.87961 2.47337 6.87239 2.47282C5.86516 2.47227 4.91129 2.69565 4.01078 3.14295C3.11028 3.59026 2.29716 4.21863 1.57144 5.02806C1.37008 5.24787 1.14354 5.35447 0.891836 5.34788C0.64013 5.34129 0.428696 5.22094 0.257536 4.98685C0.0763068 4.73957 -0.0092734 4.4442 0.000794863 4.10076C0.0108631 3.75731 0.11658 3.46881 0.317945 3.23527C1.20395 2.20493 2.20333 1.40813 3.31607 0.844879C4.42882 0.281627 5.61426 0 6.87239 0Z"
+                  fill="white"
+                />
+              </svg>
+              <p>Free Wi-Fi</p>
+            </div>
+
+            <div class="information-text-utility-item">
+              <svg
+                width="11"
+                height="15"
+                viewBox="0 0 11 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.49791 14.0126C5.4267 14.0126 5.35156 14.006 5.27249 13.9928C5.19343 13.9796 5.12012 13.9597 5.05258 13.9333C3.50636 13.338 2.2777 12.3283 1.36662 10.9044C0.455541 9.4804 0 7.93896 0 6.28005V2.88047C0 2.6106 0.0772326 2.36639 0.231698 2.14785C0.386163 1.92931 0.583826 1.77056 0.824686 1.67161L5.05415 0.0841361C5.20704 0.0280453 5.35496 0 5.49791 0C5.64085 0 5.78903 0.0280453 5.94245 0.0841361L10.1711 1.67161C10.412 1.77056 10.6097 1.92931 10.7641 2.14785C10.9186 2.36639 10.9958 2.6106 10.9958 2.88047V6.28005C10.9958 7.93896 10.5403 9.4804 9.62919 10.9044C8.71811 12.3283 7.48946 13.338 5.94324 13.9333C5.87517 13.9597 5.80186 13.9796 5.72332 13.9928C5.64478 14.006 5.56964 14.0126 5.49791 14.0126Z"
+                  fill="white"
+                />
+              </svg>
+
+              <p>Aman 24 Jam</p>
+            </div>
+
+            <div class="information-text-utility-item">
+              <svg
+                width="14"
+                height="10"
+                viewBox="0 0 14 10"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.7568 0.701132C13.6897 0.659275 13.6131 0.635175 13.5341 0.6311C13.4552 0.627025 13.3765 0.643109 13.3055 0.677839C10.8056 1.90071 9.02015 1.32771 7.13285 0.72326C5.15296 0.0891125 3.10028 -0.565999 0.264374 0.818761C0.185137 0.856769 0.118268 0.916415 0.0714876 0.99081C0.0247072 1.06521 -7.59202e-05 1.15132 1.74707e-07 1.2392V8.22297C-1.09572e-05 8.30202 0.0200893 8.37976 0.0584094 8.44889C0.0967294 8.51802 0.152009 8.57627 0.219046 8.61814C0.286083 8.66002 0.362672 8.68415 0.441607 8.68826C0.520541 8.69238 0.599224 8.67634 0.670252 8.64166C3.17016 7.41879 4.95555 7.99179 6.84577 8.59624C7.96615 8.95437 9.1075 9.31948 10.3979 9.31948C11.3931 9.31948 12.4786 9.10286 13.7119 8.50074C13.7903 8.46249 13.8563 8.40303 13.9025 8.32912C13.9487 8.25521 13.9733 8.16981 13.9734 8.08263V1.09886C13.9741 1.01961 13.9546 0.941495 13.9166 0.871899C13.8787 0.802303 13.8237 0.743527 13.7568 0.701132ZM13.044 7.78623C10.6798 8.84431 8.95319 8.29227 7.12994 7.70937C6.00955 7.35124 4.8682 6.98612 3.57778 6.98612C2.67117 6.99053 1.77378 7.16843 0.934043 7.51021V1.5356C3.29827 0.477521 5.02485 1.02956 6.8481 1.61246C8.67134 2.19537 10.5482 2.79749 13.044 1.81278V7.78623ZM6.98785 2.79749C6.6193 2.79749 6.25903 2.90678 5.95259 3.11153C5.64615 3.31629 5.40731 3.60732 5.26627 3.94781C5.12523 4.28831 5.08833 4.66298 5.16023 5.02445C5.23213 5.38592 5.40961 5.71795 5.67021 5.97856C5.93082 6.23916 6.26285 6.41664 6.62432 6.48854C6.98579 6.56044 7.36046 6.52354 7.70096 6.3825C8.04145 6.24146 8.33248 6.00262 8.53724 5.69618C8.74199 5.38974 8.85128 5.02947 8.85128 4.66092C8.85128 4.1667 8.65496 3.69273 8.3055 3.34327C7.95603 2.99381 7.48206 2.79749 6.98785 2.79749ZM6.98785 5.59263C6.80358 5.59263 6.62344 5.53799 6.47022 5.43561C6.317 5.33323 6.19758 5.18772 6.12706 5.01747C6.05654 4.84722 6.03809 4.65988 6.07404 4.47915C6.10999 4.29841 6.19873 4.1324 6.32903 4.00209C6.45933 3.87179 6.62535 3.78305 6.80609 3.7471C6.98682 3.71115 7.17416 3.72961 7.3444 3.80012C7.51465 3.87064 7.66017 3.99006 7.76254 4.14328C7.86492 4.2965 7.91957 4.47664 7.91957 4.66092C7.91957 4.90802 7.8214 5.14501 7.64667 5.31974C7.47194 5.49447 7.23496 5.59263 6.98785 5.59263ZM2.79514 2.79749V5.59263C2.79514 5.71618 2.74606 5.83468 2.65869 5.92204C2.57133 6.00941 2.45284 6.05849 2.32928 6.05849C2.20573 6.05849 2.08724 6.00941 1.99987 5.92204C1.91251 5.83468 1.86343 5.71618 1.86343 5.59263V2.79749C1.86343 2.67394 1.91251 2.55544 1.99987 2.46808C2.08724 2.38071 2.20573 2.33163 2.32928 2.33163C2.45284 2.33163 2.57133 2.38071 2.65869 2.46808C2.74606 2.55544 2.79514 2.67394 2.79514 2.79749ZM11.1806 6.52434V3.7292C11.1806 3.60565 11.2296 3.48716 11.317 3.39979C11.4044 3.31243 11.5229 3.26335 11.6464 3.26335C11.77 3.26335 11.8885 3.31243 11.9758 3.39979C12.0632 3.48716 12.1123 3.60565 12.1123 3.7292V6.52434C12.1123 6.6479 12.0632 6.76639 11.9758 6.85375C11.8885 6.94112 11.77 6.9902 11.6464 6.9902C11.5229 6.9902 11.4044 6.94112 11.317 6.85375C11.2296 6.76639 11.1806 6.6479 11.1806 6.52434Z"
+                  fill="white"
+                />
+              </svg>
+
+              <p>Harga Terjangkau</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="relative flex min-h-screen flex-col">
+      <div class="mt-5 flex flex-col items-center gap-6 pb-80">
+        <div class="flex w-full flex-row items-center gap-3 md:w-auto md:gap-5">
+          <button
+            id="semuaKosanhover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b from-[#000379] to-[#8A38F5] px-2 py-2 text-[0.5rem] font-bold text-[#535353] text-white shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('semuaKosan'), showHover('semuaKosanhover'))"
+          >
+            semua kos
+          </button>
+
+          <button
+            id="kosanPutrahover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('kosanPutra'), showHover('kosanPutrahover'))"
+          >
+            kosan putra
+          </button>
+
+          <button
+            id="kosanPutrihover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="(showKosan('kosanPutri'), showHover('kosanPutrihover'))"
+          >
+            kosan putri
+          </button>
+
+          <button
+            id="kosanCampuranhover"
+            class="kosanHover w-full cursor-pointer rounded-[0.5rem] bg-gradient-to-b px-2 py-2 text-[0.5rem] font-bold text-[#535353] shadow-md shadow-black/30 transition-all duration-300 hover:from-[#000379] hover:to-[#8A38F5] hover:text-white md:w-45 md:text-[1rem]"
+            onclick="
+              (showKosan('kosanCampuran'), showHover('kosanCampuranhover'))
+            "
+          >
+            kosan campuran
+          </button>
+        </div>
+        <div
+          id="semuaKosan"
+          class="kosan-content flex w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="semuaKosanhomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+        <div
+          id="kosanPutra"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanPutrahomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+
+        <div
+          id="kosanPutri"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanPutrihomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+
+        <div
+          id="kosanCampuran"
+          class="kosan-content flex hidden w-full flex-col items-center justify-center gap-4 px-10 md:px-30"
+        >
+          <h1 class="text-[1rem] font-bold text-[#535353] md:text-[2rem]">
+            Pilih Kosan Terbaikmu
+          </h1>
+          <h2
+            class="self-start text-[0.8rem] font-bold text-[#535353] md:text-[1.3rem]"
+          >
+            Kosan favorit!
+          </h2>
+          <div
+            id="kosanCampuranhomepage"
+            class="flex w-full flex-wrap gap-6 justify-self-start"
+          ></div>
+        </div>
+      </div>
+      <img
+        class="absolute bottom-0 left-0 -z-[5] h-[500px] w-full object-cover md:h-[900px]"
+        src="img/bandung.webp"
+        alt=""
+      />
+    </div>
+    <div class="flex h-auto w-full flex-col items-center gap-6 bg-[#181E27]">
+      <img class="h-auto w-[8rem]" src="img/img-widyatama-white.png" alt="" />
+      <div class="flex flex-col gap-10 px-10 py-5 md:flex-row">
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Widyatama Kampus Kos</h1>
+          <p class="text-[0.9rem] text-white">
+            Platform terpercaya bagi Mahasiswa untuk mencari kosan di Bandung
+          </p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Kontak Kami</h1>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.9669 11.5669C14.8037 11.3932 14.2278 10.8794 13.169 10.1997C12.1025 9.5141 11.3159 9.0866 11.0903 8.98692C11.0704 8.9781 11.0485 8.97486 11.0269 8.97756C11.0053 8.98026 10.9849 8.98879 10.9678 9.00223C10.6044 9.28567 9.99248 9.80629 9.95966 9.83442C9.74779 10.016 9.74779 10.016 9.57435 9.95942C9.26935 9.85942 8.32185 9.35629 7.49623 8.52879C6.6706 7.70129 6.14154 6.73035 6.04154 6.42567C5.98435 6.25192 5.98435 6.25192 6.16654 6.04004C6.19466 6.00723 6.7156 5.39535 6.99904 5.03223C7.01248 5.01513 7.02101 4.99469 7.02371 4.97311C7.02641 4.95152 7.02317 4.92961 7.01435 4.90973C6.91466 4.68379 6.48716 3.89754 5.80154 2.83098C5.12091 1.77254 4.60779 1.1966 4.43404 1.03348C4.41809 1.01843 4.39839 1.00797 4.37699 1.00318C4.3556 0.998398 4.33331 0.999472 4.31248 1.00629C3.70513 1.21502 3.11913 1.48133 2.56248 1.8016C2.02511 2.11399 1.51636 2.47319 1.04216 2.87504C1.02561 2.88912 1.0132 2.90743 1.00626 2.92802C0.999327 2.94861 0.998126 2.9707 1.00279 2.99192C1.0681 3.29629 1.38029 4.56692 2.34904 6.32692C3.33748 8.12317 4.02248 9.04348 5.47404 10.49C6.9256 11.9366 7.87498 12.6629 9.6731 13.6513C11.4331 14.62 12.7044 14.9325 13.0081 14.9972C13.0294 15.0018 13.0515 15.0006 13.0721 14.9937C13.0928 14.9868 13.1111 14.9744 13.1253 14.9579C13.5271 14.4837 13.8862 13.9749 14.1984 13.4375C14.5186 12.8809 14.7849 12.2949 14.9937 11.6875C15.0004 11.6669 15.0014 11.6448 14.9967 11.6236C14.992 11.6024 14.9817 11.5828 14.9669 11.5669Z"
+                fill="white"
+              />
+            </svg>
+            <p class="text-[0.9rem] text-white">+62 999-9999-9999</p>
+          </div>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18.3337 6.27917V14.1667C18.3337 14.8044 18.0901 15.4179 17.6526 15.8819C17.2151 16.3458 16.6169 16.6251 15.9803 16.6625L15.8337 16.6667H4.16699C3.52932 16.6667 2.91573 16.4231 2.45177 15.9856C1.98782 15.5481 1.70857 14.9499 1.67116 14.3133L1.66699 14.1667V6.27917L9.53783 11.5267L9.63449 11.5817C9.74841 11.6373 9.87353 11.6663 10.0003 11.6663C10.1271 11.6663 10.2522 11.6373 10.3662 11.5817L10.4628 11.5267L18.3337 6.27917Z"
+                fill="white"
+              />
+              <path
+                d="M15.8339 3.33337C16.7339 3.33337 17.5231 3.80837 17.9631 4.52254L10.0006 9.83087L2.03809 4.52254C2.24708 4.18323 2.53416 3.89879 2.8754 3.69295C3.21663 3.48711 3.60213 3.36582 3.99975 3.33921L4.16725 3.33337H15.8339Z"
+                fill="white"
+              />
+            </svg>
+            <p class="text-[0.9rem] text-white">wekost@gmail.com</p>
+          </div>
+          <div class="flex flex-row items-center gap-1.5">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.8337 7.49996C15.8337 6.73391 15.6828 5.97537 15.3896 5.26764C15.0965 4.55991 14.6668 3.91684 14.1251 3.37517C13.5834 2.83349 12.9404 2.40381 12.2326 2.11066C11.5249 1.81751 10.7664 1.66663 10.0003 1.66663C9.23428 1.66663 8.47574 1.81751 7.76801 2.11066C7.06027 2.40381 6.41721 2.83349 5.87554 3.37517C5.33386 3.91684 4.90418 4.55991 4.61103 5.26764C4.31788 5.97537 4.16699 6.73391 4.16699 7.49996C4.16699 8.65579 4.50783 9.73079 5.08783 10.6375H5.08116L10.0003 18.3333L14.9195 10.6375H14.9137C15.5144 9.7013 15.8337 8.61231 15.8337 7.49996ZM10.0003 9.99996C9.33728 9.99996 8.7014 9.73657 8.23256 9.26773C7.76372 8.79889 7.50033 8.163 7.50033 7.49996C7.50033 6.83692 7.76372 6.20103 8.23256 5.73219C8.7014 5.26335 9.33728 4.99996 10.0003 4.99996C10.6634 4.99996 11.2993 5.26335 11.7681 5.73219C12.2369 6.20103 12.5003 6.83692 12.5003 7.49996C12.5003 8.163 12.2369 8.79889 11.7681 9.26773C11.2993 9.73657 10.6634 9.99996 10.0003 9.99996Z"
+                fill="white"
+              />
+            </svg>
+
+            <p class="text-[0.9rem] text-white">Bandung, Jawa Barat</p>
+          </div>
+        </div>
+        <div class="flex flex-col gap-1">
+          <h1 class="font-bold text-white">Jam Oprasional</h1>
+          <div class="flex flex-col gap-1.5">
+            <p class="text-[0.9rem] text-white">
+              Senin - Jumat : 08:00 - 20:00
+            </p>
+            <p class="text-[0.9rem] text-white">Sabtu : 08:00 - 17:00</p>
+            <p class="text-[0.9rem] text-white">Minggu : 10:00 - 15:00</p>
+          </div>
+        </div>
+      </div>
+      <div class="flex w-full flex-col gap-1 px-20">
+        <hr class="bg-white" />
+        <div class="flex w-full flex-row items-center justify-center gap-2">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.91967 6.09337C8.77301 6.13337 8.99301 6.86004 9.00634 7.20004H10.1997C10.1463 5.88004 9.20634 5.07337 7.89967 5.07337C6.42634 5.07337 5.33301 6.00004 5.33301 8.09337C5.33301 9.38671 5.95301 10.92 7.89301 10.92C9.37301 10.92 10.1663 9.82004 10.1863 8.95337H8.99301C8.97301 9.34671 8.69301 9.87337 7.90634 9.91337C7.03301 9.88671 6.66634 9.20671 6.66634 8.09337C6.66634 6.16671 7.51967 6.10671 7.91967 6.09337ZM7.99967 1.33337C4.31967 1.33337 1.33301 4.32004 1.33301 8.00004C1.33301 11.68 4.31967 14.6667 7.99967 14.6667C11.6797 14.6667 14.6663 11.68 14.6663 8.00004C14.6663 4.32004 11.6797 1.33337 7.99967 1.33337ZM7.99967 13.3334C5.05967 13.3334 2.66634 10.94 2.66634 8.00004C2.66634 5.06004 5.05967 2.66671 7.99967 2.66671C10.9397 2.66671 13.333 5.06004 13.333 8.00004C13.333 10.94 10.9397 13.3334 7.99967 13.3334Z"
+              fill="white"
+            />
+          </svg>
+          <p class="text-[0.5rem] text-white">
+            2025 Widyatama Kampus Kos. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </div>
+    <script src="js/homepage.js"></script>
   </body>
 </html>

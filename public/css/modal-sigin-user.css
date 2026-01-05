@@ -12,23 +12,23 @@
 .modal-card {
   position: relative;
   background-color: #fff;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 1rem;
+  border-radius: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  width: 25rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 1rem;
 }
 .modal-card-form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
-  width: 400px;
+  gap: 1rem;
+  width: 25rem;
 }
 
 .input-group {
@@ -39,16 +39,16 @@
 .input-group .icon {
   position: absolute;
   top: 50%;
-  right: 12px;
+  right: 1rem;
   transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
+  width: 1rem;
+  height: 1rem;
   fill: #777;
 }
 
 .input-group input {
   width: 100%;
-  padding: 10px 40px 10px 10px;
+  padding: 0.5rem 1.5rem 0.5rem 0.5rem;
   border: none;
   border-bottom: 2px solid #535353;
   font-size: 15px;
@@ -64,12 +64,12 @@
 }
 .modal-card-form button {
   width: 80%;
-  padding: 7px;
+  padding: 0.5rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 1rem;
   background: linear-gradient(95deg, #516bff, #8a38f5);
   color: #fff;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -77,11 +77,11 @@
   background: linear-gradient(95deg, #394cb4, #5b25a3);
 }
 .modal-sigin-have-account p {
-  font-size: 14px;
+  font-size: 1rem;
   color: #535353;
 }
 .modal-sigin-have-account a {
-  font-size: 14px;
+  font-size: 1rem;
   color: blue;
   cursor: pointer;
   text-decoration: underline;
