@@ -198,13 +198,16 @@ document.getElementById('form-login').addEventListener('submit', async (e) => {
     password: password,
   };
   try {
-    const response = await fetch(`${apiUrl}/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/auth/login`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataUser),
       },
-      body: JSON.stringify(dataUser),
-    });
+    );
     const data = await response.json();
     localStorage.setItem('token', data.token);
     err_message.textContent = data.message;
@@ -245,7 +248,7 @@ if (semuaKosan) {
 async function showSemuakosanhomepage() {
   try {
     const response = await fetch(
-      `https://ourkost-production.up.railway.app//homepage/semua/kosan`,
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan`,
     );
     const data = await response.json();
     console.log(data);
