@@ -244,7 +244,9 @@ if (semuaKosan) {
 }
 async function showSemuakosanhomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app//homepage/semua/kosan`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {
