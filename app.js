@@ -12,7 +12,7 @@ const path = require('path');
 const { json } = require('body-parser');
 const { message } = require('statuses');
 const status = require('statuses');
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 const SECRET = process.env.SECRET;
 
 // Middleware

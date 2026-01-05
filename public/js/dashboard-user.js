@@ -1,3 +1,8 @@
+function logout() {
+  localStorage.removeItem('token');
+  window.location.href = 'index.html';
+}
+
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.toggle('-translate-x-full');
