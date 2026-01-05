@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 function showSection(sectionId) {
   const notifikasi = document.querySelectorAll('.notifikasi');
   notifikasi.forEach((item) => {
@@ -83,14 +81,17 @@ generate_code_form.addEventListener('submit', async (e) => {
       kode: kode,
     };
     console.log(data_kode);
-    const response = await fetch(`${apiUrl}/generate/kamar/admin`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/generate/kamar/admin`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data_kode),
       },
-      body: JSON.stringify(data_kode),
-    });
+    );
     err_msg.innerHTML = '';
     const data = await response.json();
     if (data.message) {

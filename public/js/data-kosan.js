@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 const token = localStorage.getItem('token');
 if (!token) {
   window.location.href = '/index.html';
@@ -167,13 +165,16 @@ form_tambah_kosan.addEventListener('submit', async (e) => {
     overlay.classList.remove('hidden');
     loading.classList.remove('hidden');
 
-    const response = await fetch(`${apiUrl}/admin/kamar`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/admin/kamar`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formdata,
       },
-      body: formdata,
-    });
+    );
     const data = await response.json();
 
     if (data.cloudUrl) {

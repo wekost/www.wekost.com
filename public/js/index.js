@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 //logic information scroll
 const slider = document.getElementById('slider');
 const speed = 0.5;
@@ -126,13 +124,16 @@ document
       confirm_password: confirm_password,
     };
     try {
-      const response = await fetch(`${apiUrl}/auth/user/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://ourkost-production.up.railway.app/auth/user/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataUser),
         },
-        body: JSON.stringify(dataUser),
-      });
+      );
       const resJson = await response.json();
       if (resJson.status === true) {
         showLogin();
@@ -165,13 +166,16 @@ document
       confirm_password: confirm_password,
     };
     try {
-      const response = await fetch(`${apiUrl}/auth/admin/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        `https://ourkost-production.up.railway.app/auth/admin/register`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(dataUser),
         },
-        body: JSON.stringify(dataUser),
-      });
+      );
       const resJson = await response.json();
       localStorage.setItem('token', resJson.token);
       if (resJson.status === true) {
@@ -320,7 +324,9 @@ if (semuaKosanputra) {
 }
 async function showSemuakosanputrahomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan/putra`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/putra`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {

@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 function logout() {
   localStorage.removeItem('token');
   window.location.href = 'index.html';
@@ -56,12 +54,15 @@ async function loadDashboard() {
   const kamar_kosong = document.getElementById('kamar-kosong');
 
   const token = localStorage.getItem('token');
-  const response = await fetch(`${apiUrl}/dashboard/admin`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    `https://ourkost-production.up.railway.app/dashboard/admin`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const data = await response.json();
   const fasilitas = JSON.parse(data.fasilitas);
   kamar_terisi.textContent = data.kamar_terisi;
@@ -101,12 +102,15 @@ data_penyewa.addEventListener('click', async (e) => {
       window.location.href = 'index.html';
       return;
     }
-    const response = await fetch(`${apiUrl}/dashboard/admin/penyewa`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/dashboard/admin/penyewa`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const data = await response.json();
 
     thead.innerHTML = `
@@ -331,13 +335,16 @@ form_tambah_kamar.addEventListener('submit', async (e) => {
     overlay.classList.remove('hidden');
     loading.classList.remove('hidden');
 
-    const response = await fetch(`${apiUrl}/dashboard/admin/kamar`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/dashboard/admin/kamar`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formdata,
       },
-      body: formdata,
-    });
+    );
     const data = await response.json();
     if (data.cloudUrl) {
       loading.classList.add('hidden');
@@ -369,11 +376,14 @@ if (list_kamar) {
 async function loadKamar() {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${apiUrl}/dashboard/admin/kamar`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/dashboard/admin/kamar`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const data = await response.json();
     data.forEach((item) => {
       let hargaKamar = item.harga_kamar.toLocaleString('id-ID', {
@@ -490,11 +500,14 @@ btn_notifikasi.addEventListener('click', async () => {
     window.location.href = 'index.html';
     return;
   }
-  const response = await fetch(`${apiUrl}/dashboard/admin/notifikasi`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
+  const response = await fetch(
+    `https://ourkost-production.up.railway.app/dashboard/admin/notifikasi`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     },
-  });
+  );
   const data = await response.json();
   if (data.status == true) {
     window.location.href = 'notifikasi.html';

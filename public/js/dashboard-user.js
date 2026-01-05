@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 function logout() {
   localStorage.removeItem('token');
   window.location.href = 'index.html';
@@ -63,12 +61,15 @@ async function getDashboardUser() {
       window.location.href = 'index.html';
       return;
     }
-    const response = await fetch(`${apiUrl}/dashboard/user`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/dashboard/user`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
     const data = await response.json();
     const data_fasilitas = JSON.parse(data.fasilitas_kamar);
     nama_user.textContent = data.name;

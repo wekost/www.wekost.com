@@ -1,5 +1,3 @@
-const apiUrl = import.meta.env.VITE_API_URL;
-
 const slider = document.getElementById('slider');
 const speed = 0.5;
 
@@ -38,7 +36,9 @@ if (semuaKosan) {
 }
 async function showSemuakosanhomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.apphomepage/semua/kosan`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {
@@ -134,7 +134,9 @@ async function openDetailkamar(id_kamar) {
     const gambar_kamar = document.getElementById('img-kamar-modal');
     const deskripsi_kamar = document.getElementById('deskripsi-kamar-modal');
     const harga_kamar = document.getElementById('harga-kamar-modal');
-    const response = await fetch(`${apiUrl}/kamar/${id_kamar}`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/kamar/${id_kamar}`,
+    );
     const data = await response.json();
     const kamar = Array.isArray(data) ? data[0] : data;
     nama_kamar.textContent = kamar.nama_kamar;
@@ -152,7 +154,9 @@ if (semuaKosanputra) {
 }
 async function showSemuakosanputrahomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan/putra`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/putra`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {
@@ -231,7 +235,9 @@ if (semuaKosanputri) {
 }
 async function showSemuakosanputrihomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan/putri`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/putri`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {
@@ -309,7 +315,9 @@ if (semuaKosancampuran) {
 }
 async function showSemuakosancampuranhomepage() {
   try {
-    const response = await fetch(`${apiUrl}/homepage/semua/kosan/campuran`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/campuran`,
+    );
     const data = await response.json();
     console.log(data);
     data.forEach((item) => {
@@ -435,7 +443,9 @@ async function openDetail(id) {
     );
     loading.classList.remove('hidden');
     loading.classList.add('flex');
-    const response = await fetch(`http://localhost:8080/kosan/${id}`);
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/kosan/${id}`,
+    );
     const data = await response.json();
     console.log(data);
     if (data) {
