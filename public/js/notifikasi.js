@@ -1,3 +1,5 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function showSection(sectionId) {
   const notifikasi = document.querySelectorAll('.notifikasi');
   notifikasi.forEach((item) => {
@@ -20,7 +22,7 @@ btn_generate_code.addEventListener('click', async (e) => {
   generate_kode_card.classList.remove('hidden');
   const list_kamar = document.getElementById('pilih-kamar-kosong');
   const token = localStorage.getItem('token');
-  const response = await fetch('http://localhost:8080/generate/kamar/admin', {
+  const response = await fetch(`${apiUrl}/generate/kamar/admin`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -81,7 +83,7 @@ generate_code_form.addEventListener('submit', async (e) => {
       kode: kode,
     };
     console.log(data_kode);
-    const response = await fetch('http://localhost:8080/generate/kamar/admin', {
+    const response = await fetch(`${apiUrl}/generate/kamar/admin`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

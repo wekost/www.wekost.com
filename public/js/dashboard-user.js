@@ -1,3 +1,5 @@
+const apiUrl = import.meta.env.VITE_API_URL;
+
 function logout() {
   localStorage.removeItem('token');
   window.location.href = 'index.html';
@@ -61,7 +63,7 @@ async function getDashboardUser() {
       window.location.href = 'index.html';
       return;
     }
-    const response = await fetch('http://localhost:8080/dashboard/user', {
+    const response = await fetch(`${apiUrl}/dashboard/user`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
