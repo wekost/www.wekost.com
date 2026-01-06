@@ -451,14 +451,16 @@ async function openDetail(id) {
       loading.classList.remove('flex');
       loading.classList.add('hidden');
     }
+    console.log(data);
     const kos = Array.isArray(data.kos) ? data.kos[0] : data.kos;
+    console.log(kos);
     nama_kosan.textContent = kos.nama_kos;
     gambar_kosan.src = kos.foto_kosan;
     harga_kosan.textContent = 'RP ' + kos.harga.toLocaleString('id-ID');
     ketersediaan_kamar.textContent = kos.ketersediaan_kamar + ' Kamar Tersedia';
     total_kamar.textContent = kos.jumlah_kamar + ' Kamar';
     fasilitas_kamar.innerHTML = '';
-    data.kos.forEach((item) => {
+    [data.kos].forEach((item) => {
       const fasilitas = JSON.parse(item.fasilitas);
 
       fasilitas.forEach((itemFasilitas) => {
@@ -476,7 +478,7 @@ async function openDetail(id) {
     list_harga_kamar_satu.innerHTML = '';
     list_harga_kamar_dua.innerHTML = '';
     list_harga_kamar_tiga.innerHTML = '';
-    [data.kos].forEach((item) => {
+    data.kamar.forEach((item) => {
       const harga = Number(item.harga_kamar);
       const status = String(item.status_kamar).toLowerCase().trim();
       if (harga <= 850000) {
