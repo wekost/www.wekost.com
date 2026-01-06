@@ -447,19 +447,18 @@ async function openDetail(id) {
       `https://ourkost-production.up.railway.app/kosan/${id}`,
     );
     const data = await response.json();
-    console.log(data);
     if (data) {
       loading.classList.remove('flex');
       loading.classList.add('hidden');
     }
-    const kos = Array.isArray(data) ? data[0] : data;
+    const kos = Array.isArray(data.kos) ? data.kos[0] : data.kos;
     nama_kosan.textContent = kos.nama_kos;
     gambar_kosan.src = kos.foto_kosan;
     harga_kosan.textContent = 'RP ' + kos.harga.toLocaleString('id-ID');
     ketersediaan_kamar.textContent = kos.ketersediaan_kamar + ' Kamar Tersedia';
     total_kamar.textContent = kos.jumlah_kamar + ' Kamar';
     fasilitas_kamar.innerHTML = '';
-    data.forEach((item) => {
+    data.kos.forEach((item) => {
       const fasilitas = JSON.parse(item.fasilitas);
 
       fasilitas.forEach((itemFasilitas) => {
@@ -477,7 +476,7 @@ async function openDetail(id) {
     list_harga_kamar_satu.innerHTML = '';
     list_harga_kamar_dua.innerHTML = '';
     list_harga_kamar_tiga.innerHTML = '';
-    data.forEach((item) => {
+    data.kamar.forEach((item) => {
       const harga = Number(item.harga_kamar);
       const status = String(item.status_kamar).toLowerCase().trim();
       if (harga <= 850000) {

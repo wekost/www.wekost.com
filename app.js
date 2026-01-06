@@ -369,19 +369,52 @@ app.get('/homepage/semua/kosan', (req, res) => {
 });
 
 app.get('/kosan/:id', (req, res) => {
-  try {
-    const id = req.params.id;
-    const sqlSelect =
-      "SELECT k.id_kos, k.nama_kos, k.foto_kosan, k.harga, SUM(CASE WHEN ka.status_kamar = 'Kosong' THEN 1 ELSE 0 END) AS ketersediaan_kamar, COUNT(ka.id_kamar) AS jumlah_kamar, k.fasilitas, ka.harga_kamar, ka.status_kamar, ka.id_kamar FROM kos k JOIN kamar ka ON k.id_kos = ka.id_kos WHERE k.id_kos = ? GROUP BY k.id_kos, k.nama_kos, k.foto_kosan, k.harga;";
-    db.query(sqlSelect, [id], (err, resultKosan) => {
-      if (err) {
-        return console.log(err);
-      }
-      return res.json(resultKosan);
+  const id = req.params.id;
+  const sqlKosan = `
+    SELECT
+      k.id_kos,
+      k.nama_kos,
+      k.foto_kosan,
+      k.harga,
+      k.fasilitas,
+      SUM(ka.status_kamar = 'Kosong') AS ketersediaan_kamar,
+      COUNT(ka.id_kamar) AS jumlah_kamar
+    FROM kos k
+    JOIN kamar ka ON k.id_kos = ka.id_kos
+    WHERE k.id_kos = ?
+    GROUP BY
+      k.id_kos,
+      k.nama_kos,
+      k.foto_kosan,
+      k.harga,
+      k.fasilitas;
+  `;
+
+  const sqlKamar = `
+    SELECT
+      id_kamar,
+      harga_kamar,
+      status_kamar
+    FROM kamar
+    WHERE id_kos = ?;
+  `;
+
+  db.query(sqlKosan, [id], (err, kosResult) => {
+    if (err) return res.status(500).json(err);
+
+    if (kosResult.length === 0) {
+      return res.status(404).json({ message: 'Kos tidak ditemukan' });
+    }
+
+    db.query(sqlKamar, [id], (err, kamarResult) => {
+      if (err) return res.status(500).json(err);
+
+      return res.json({
+        kos: kosResult[0],
+        kamar: kamarResult,
+      });
     });
-  } catch (err) {
-    console.log(err);
-  }
+  });
 });
 
 app.get('/kamar/:id_kamar', (req, res) => {
