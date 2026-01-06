@@ -122,8 +122,8 @@ semuaKosan.addEventListener('click', (e) => {
 
 document.addEventListener('click', (e) => {
   const card = e.target.closest('.card-kamar');
-  const id_kamar = card.dataset.id;
   if (!card) return;
+  const id_kamar = card.dataset.id;
   openDetailkamar(id_kamar);
 });
 
@@ -485,7 +485,7 @@ async function openDetail(id) {
         harga_kamar_dua.classList.add('hidden');
         harga_kamar_tiga.classList.add('hidden');
         const div = document.createElement('div');
-        if (status === 'terisi') {
+        if (status === 'Terisi') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -505,7 +505,7 @@ async function openDetail(id) {
               `;
           div.dataset.id = item.id_kamar;
           list_harga_kamar_satu.appendChild(div);
-        } else if (status == 'kosong') {
+        } else if (status == 'Kosong') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -531,7 +531,7 @@ async function openDetail(id) {
         harga_kamar_dua.classList.remove('hidden');
         harga_kamar_tiga.classList.add('hidden');
         const div = document.createElement('div');
-        if (status == 'terisi') {
+        if (status == 'Terisi') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -551,7 +551,7 @@ async function openDetail(id) {
               `;
           div.dataset.id = item.id_kamar;
           list_harga_kamar_dua.appendChild(div);
-        } else if (status == 'kosong') {
+        } else if (status == 'Kosong') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -577,7 +577,7 @@ async function openDetail(id) {
         harga_kamar_dua.classList.add('hidden');
         harga_kamar_tiga.classList.remove('hidden');
         const div = document.createElement('div');
-        if (status == 'terisi') {
+        if (status == 'Terisi') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -597,7 +597,7 @@ async function openDetail(id) {
               `;
           div.dataset.id = item.id_kamar;
           list_harga_kamar_tiga.appendChild(div);
-        } else if (status == 'kosong') {
+        } else if (status == 'Kosong') {
           div.classList.add(
             'card-kamar',
             'flex',
@@ -647,14 +647,17 @@ form_kode_penyewa.addEventListener('submit', async (e) => {
       kode: kode_penyewa,
     };
     const token = localStorage.getItem('token');
-    const response = await fetch(`${apiUrl}/homepage/user/kode`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/user/kode`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(data_kode),
       },
-      body: JSON.stringify(data_kode),
-    });
+    );
     const data = await response.json();
     if (data.status == true) {
       window.location.href = 'dashboard-user.html';
