@@ -395,3 +395,149 @@ async function showSemuakosanputrahomepage() {
     console.log(err);
   }
 }
+
+const semuaKosanputri = document.getElementById('kosanPutrihomepage');
+if (semuaKosanputri) {
+  showSemuakosanputrihomepage();
+}
+async function showSemuakosanputrihomepage() {
+  try {
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/putri`,
+    );
+    const data = await response.json();
+    console.log(data);
+    data.forEach((item) => {
+      const fasilitas = JSON.parse(item.fasilitas);
+      const div = document.createElement('div');
+      div.classList.add(
+        'flex',
+        'w-full',
+        'max-w-[22rem]',
+        'flex-col',
+        'gap-5',
+        'bg-white',
+        'px-5',
+        'py-3',
+        'rounded-[0.5rem]',
+        'shadow-md',
+        'shadow-black/35',
+      );
+      div.innerHTML = `<img class="h-[160px] w-full rounded-md object-cover" src="${item.foto_kosan}" alt="" />
+              <h3 class="font-bold text-black">${item.nama_kos}</h3>
+              <div class="flex flex-col">
+                <div class="flex flex-row justify-between">
+                  <p class="text-[0.7rem] font-normal">Mulai dari:</p>
+                  <p
+                    class="rounded-[1rem] bg-[#FB7EE0] px-4 py-1 text-[0.7rem] font-bold text-white"
+                  >
+                    ${item.tipe}
+                  </p>
+                </div>
+                <p class="text-[1.2rem] font-bold text-[#0077FF]">
+                  Rp ${item.harga.toLocaleString('id-ID')}/bulan
+                </p>
+              </div>
+              <div class="flex flex-col gap-[1rem]">
+                <div class="fasilitasKamar flex flex-row items-center justify-center gap-1.5">
+                </div>
+                <button
+                  onclick="showrole()"
+                  class="w-full cursor-pointer rounded-[1rem] bg-linear-to-r from-[#516BFF] to-[#8A38F5] py-2 font-bold text-white hover:from-[#4055ce] hover:to-[#6428b1]">
+                  Lihat Detail
+                </button>
+              </div>`;
+      semuaKosanputri.appendChild(div);
+
+      const fasilitasContainer = div.querySelector('.fasilitasKamar');
+      fasilitas.slice(0, 4).forEach((f) => {
+        const p = document.createElement('p');
+        p.classList.add(
+          'rounded-[0.5rem]',
+          'bg-[#F3F4F6]',
+          'px-3',
+          'py-1',
+          'text-[0.6rem]',
+          'text-[#535353]',
+        );
+        p.textContent = f.replace('-', ' ');
+        fasilitasContainer.appendChild(p);
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+const semuaKosancampuran = document.getElementById('kosanCampuranhomepage');
+if (semuaKosancampuran) {
+  showSemuakosancampuranhomepage();
+}
+async function showSemuakosancampuranhomepage() {
+  try {
+    const response = await fetch(
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan/campuran`,
+    );
+    const data = await response.json();
+    console.log(data);
+    data.forEach((item) => {
+      const fasilitas = JSON.parse(item.fasilitas);
+      const div = document.createElement('div');
+      div.classList.add(
+        'flex',
+        'w-full',
+        'max-w-[22rem]',
+        'flex-col',
+        'gap-5',
+        'bg-white',
+        'px-5',
+        'py-3',
+        'rounded-[0.5rem]',
+        'shadow-md',
+        'shadow-black/35',
+      );
+      div.innerHTML = `<img class="h-[160px] w-full rounded-md object-cover" src="${item.foto_kosan}" alt="" />
+              <h3 class="font-bold text-black">${item.nama_kos}</h3>
+              <div class="flex flex-col">
+                <div class="flex flex-row justify-between">
+                  <p class="text-[0.7rem] font-normal">Mulai dari:</p>
+                  <p
+                    class="rounded-[1rem] bg-[#05C41B] px-4 py-1 text-[0.7rem] font-bold text-white"
+                  >
+                    ${item.tipe}
+                  </p>
+                </div>
+                <p class="text-[1.2rem] font-bold text-[#0077FF]">
+                  Rp ${item.harga.toLocaleString('id-ID')}/bulan
+                </p>
+              </div>
+              <div class="flex flex-col gap-[1rem]">
+                <div class="fasilitasKamar flex flex-row items-center justify-center gap-1.5">
+                </div>
+                <button
+                  onclick="showrole()"
+                  class="w-full cursor-pointer rounded-[1rem] bg-linear-to-r from-[#516BFF] to-[#8A38F5] py-2 font-bold text-white hover:from-[#4055ce] hover:to-[#6428b1]">
+                  Lihat Detail
+                </button>
+              </div>`;
+      semuaKosancampuran.appendChild(div);
+
+      const fasilitasContainer = div.querySelector('.fasilitasKamar');
+      fasilitas.slice(0, 4).forEach((f) => {
+        const p = document.createElement('p');
+        p.classList.add(
+          'rounded-[0.5rem]',
+          'bg-[#F3F4F6]',
+          'px-3',
+          'py-1',
+          'text-[0.6rem]',
+          'text-[#535353]',
+        );
+        p.textContent = f.replace('-', ' ');
+        fasilitasContainer.appendChild(p);
+      });
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
