@@ -480,7 +480,8 @@ async function openDetail(id) {
     list_harga_kamar_tiga.innerHTML = '';
     data.kamar.forEach((item) => {
       const harga = Number(item.harga_kamar);
-      const status = String(item.status_kamar).toLowerCase().trim();
+      const status = String(item.status_kamar);
+      console.log(status);
       if (harga <= 850000) {
         harga_kamar_satu.classList.remove('hidden');
         harga_kamar_dua.classList.add('hidden');
