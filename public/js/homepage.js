@@ -476,7 +476,7 @@ async function openDetail(id) {
     list_harga_kamar_satu.innerHTML = '';
     list_harga_kamar_dua.innerHTML = '';
     list_harga_kamar_tiga.innerHTML = '';
-    data.kamar.forEach((item) => {
+    [data.kos].forEach((item) => {
       const harga = Number(item.harga_kamar);
       const status = String(item.status_kamar).toLowerCase().trim();
       if (harga <= 850000) {
