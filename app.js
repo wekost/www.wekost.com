@@ -372,7 +372,7 @@ app.get('/kosan/:id', (req, res) => {
   try {
     const id = req.params.id;
     const sqlSelect =
-      "SELECT k.id_kos, k.nama_kos, k.foto_kosan, k.harga, SUM(CASE WHEN ka.status_kamar = 'kosong' THEN 1 ELSE 0 END) AS ketersediaan_kamar, COUNT(ka.id_kamar) AS jumlah_kamar, k.fasilitas, ka.harga_per_bulan AS harga_kamar, ka.status_kamar, ka.id_kamar FROM kos k JOIN kamar ka ON k.id_kos = ka.id_kos WHERE k.id_kos = ? GROUP BY k.id_kos, k.nama_kos, k.foto_kosan, k.harga;";
+      "SELECT k.id_kos, k.nama_kos, k.foto_kosan, k.harga, SUM(CASE WHEN ka.status_kamar = 'Kosong' THEN 1 ELSE 0 END) AS ketersediaan_kamar, COUNT(ka.id_kamar) AS jumlah_kamar, k.fasilitas, ka.harga_per_bulan AS harga_kamar, ka.status_kamar, ka.id_kamar FROM kos k JOIN kamar ka ON k.id_kos = ka.id_kos WHERE k.id_kos = ? GROUP BY k.id_kos, k.nama_kos, k.foto_kosan, k.harga;";
     db.query(sqlSelect, [id], (err, resultKosan) => {
       if (err) {
         return console.log(err);
@@ -403,7 +403,7 @@ app.get('/kamar/:id_kamar', (req, res) => {
 app.get('/homepage/semua/kosan/putra', (req, res) => {
   try {
     const sqlSelect =
-      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "putra" LIMIT 12';
+      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "Putra" LIMIT 12';
     db.query(sqlSelect, (err, kosResult) => {
       if (err) {
         return console.log(err);
@@ -424,7 +424,7 @@ app.get('/homepage/semua/kosan/putra', (req, res) => {
 app.get('/homepage/semua/kosan/putri', (req, res) => {
   try {
     const sqlSelect =
-      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "putri" LIMIT 12';
+      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "Putri" LIMIT 12';
     db.query(sqlSelect, (err, kosResult) => {
       if (err) {
         return console.log(err);
@@ -445,7 +445,7 @@ app.get('/homepage/semua/kosan/putri', (req, res) => {
 app.get('/homepage/semua/kosan/campuran', (req, res) => {
   try {
     const sqlSelect =
-      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "campuran" LIMIT 12';
+      'SELECT id_kos, foto_kosan, nama_kos, harga, tipe, fasilitas FROM kos WHERE tipe = "Campuran" LIMIT 12';
     db.query(sqlSelect, (err, kosResult) => {
       if (err) {
         return console.log(err);

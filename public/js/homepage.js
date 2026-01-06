@@ -94,7 +94,7 @@ async function showSemuakosanhomepage() {
         status.classList.add('bg-[#23AF3D]');
       }
       const fasilitasContainer = div.querySelector('.fasilitasKamar');
-      fasilitas.forEach((f) => {
+      fasilitas.slice(0, 4).forEach((f) => {
         const p = document.createElement('p');
         p.classList.add(
           'rounded-[0.5rem]',
@@ -203,7 +203,7 @@ async function showSemuakosanputrahomepage() {
       semuaKosanputra.appendChild(div);
 
       const fasilitasContainer = div.querySelector('.fasilitasKamar');
-      fasilitas.forEach((f) => {
+      fasilitas.slice(0, 4).forEach((f) => {
         const p = document.createElement('p');
         p.classList.add(
           'rounded-[0.5rem]',
@@ -284,7 +284,7 @@ async function showSemuakosanputrihomepage() {
       semuaKosanputri.appendChild(div);
 
       const fasilitasContainer = div.querySelector('.fasilitasKamar');
-      fasilitas.forEach((f) => {
+      fasilitas.slice(0, 4).forEach((f) => {
         const p = document.createElement('p');
         p.classList.add(
           'rounded-[0.5rem]',
@@ -364,7 +364,7 @@ async function showSemuakosancampuranhomepage() {
       semuaKosancampuran.appendChild(div);
 
       const fasilitasContainer = div.querySelector('.fasilitasKamar');
-      fasilitas.forEach((f) => {
+      fasilitas.slice(0, 4).forEach((f) => {
         const p = document.createElement('p');
         p.classList.add(
           'rounded-[0.5rem]',
