@@ -37,7 +37,7 @@ if (semuaKosan) {
 async function showSemuakosanhomepage() {
   try {
     const response = await fetch(
-      `https://ourkost-production.up.railway.apphomepage/semua/kosan`,
+      `https://ourkost-production.up.railway.app/homepage/semua/kosan`,
     );
     const data = await response.json();
     console.log(data);
